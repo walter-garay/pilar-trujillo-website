@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('home');
+Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+
+Route::post('/contacto', [LandingPageController::class, 'contact'])->name('contact');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
