@@ -7,16 +7,22 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+// Importar el plugin de Nuxt UI
+import ui from '@nuxt/ui/vue-plugin';
+import AppWrapper from './components/AppWrapper.vue';
+
+const appName = import.meta.env.VITE_APP_NAME || 'Pilar Trujillo';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(ZiggyVue)
-            .mount(el);
+        createApp({
+            render: () => h(AppWrapper, {}, () => h(App, props)) })
+                .use(plugin)
+                .use(ZiggyVue)
+                .use(ui) // Usar el plugin de Nuxt UI
+                .mount(el);
     },
     progress: {
         color: '#4B5563',

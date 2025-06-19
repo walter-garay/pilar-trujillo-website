@@ -1,8 +1,10 @@
+import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import path from 'path';
-import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
+
+import ui from '@nuxt/ui/vite';
 
 export default defineConfig({
     plugins: [
@@ -19,6 +21,9 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+        }),
+        ui({
+            inertia: true,
         }),
     ],
     resolve: {
