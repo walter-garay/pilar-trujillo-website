@@ -9,6 +9,8 @@
                 </p>
             </div>
             <div class="mt-2 flex gap-4">
+                <UIcon name="i-lucide-lightbulb" class="size-5" />
+
                 <UButton icon="i-simple-icons-facebook" color="primary" variant="soft" to="#" aria-label="Facebook" />
                 <UButton icon="i-simple-icons-instagram" color="primary" variant="soft" to="#" aria-label="Instagram" />
                 <UButton icon="i-simple-icons-tiktok" color="primary" variant="soft" to="#" aria-label="TikTok" />

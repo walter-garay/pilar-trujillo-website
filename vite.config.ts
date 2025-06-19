@@ -24,6 +24,11 @@ export default defineConfig({
         }),
         ui({
             inertia: true,
+            ui: {
+                colors: {
+                    primary: '#b134eb',
+                },
+            },
         }),
     ],
     resolve: {
