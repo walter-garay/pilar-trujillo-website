@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDate } from '@/lib/utils';
+import { formatDate, getYoutubeEmbedUrl } from '@/lib/utils';
 import type { Media } from '@/types';
 import { router } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
@@ -19,7 +19,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-console.log("multimedias: ", props.medias)
+console.log('multimedias: ', props.medias);
 
 // Estado para la media seleccionada
 const selectedMedia = ref<Media | null>(null);
@@ -106,7 +106,19 @@ const formatTypeName = (type: string) => {
                         <div class="p-6">
                             <div v-if="selectedMedia" class="space-y-4">
                                 <div class="aspect-video overflow-hidden rounded-lg bg-muted">
-                                    <img :src="selectedMedia.cover_image_url" :alt="selectedMedia.title" class="h-full w-full object-cover" />
+                                    <template v-if="currentType === 'television' && selectedMedia.file_url">
+                                        <iframe
+                                            :src="getYoutubeEmbedUrl(selectedMedia.file_url)"
+                                            frameborder="0"
+                                            allowfullscreen
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            class="h-full w-full rounded-lg"
+                                            title="Reproductor de video de YouTube"
+                                        ></iframe>
+                                    </template>
+                                    <template v-else>
+                                        <img :src="selectedMedia.cover_image_url" :alt="selectedMedia.title" class="h-full w-full object-cover" />
+                                    </template>
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-foreground">{{ selectedMedia.title }}</h4>
