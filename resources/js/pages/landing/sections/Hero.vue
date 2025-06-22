@@ -1,6 +1,12 @@
 <script setup lang="ts">
 // Header hero puro, sin tarjeta
 
+interface Props {
+    socialMediaUrls?: Record<string, string>;
+}
+
+const { socialMediaUrls } = defineProps<Props>();
+
 const scrollToVideo = () => {
     const el = document.getElementById('program-presentation');
     if (el) {
@@ -24,16 +30,40 @@ const scrollToVideo = () => {
                     </p>
                 </div>
                 <div class="mt-2 flex gap-6">
-                    <ULink to="#" aria-label="Facebook" class="text-foreground/80 transition-colors hover:text-primary">
+                    <ULink
+                        v-if="socialMediaUrls?.facebook"
+                        :to="socialMediaUrls.facebook"
+                        target="_blank"
+                        aria-label="Facebook"
+                        class="text-foreground/80 transition-colors hover:text-primary"
+                    >
                         <UIcon name="i-cib-facebook" class="h-6 w-6" />
                     </ULink>
-                    <ULink to="#" aria-label="Instagram" class="text-foreground/80 transition-colors hover:text-primary">
+                    <ULink
+                        v-if="socialMediaUrls?.instagram"
+                        :to="socialMediaUrls.instagram"
+                        target="_blank"
+                        aria-label="Instagram"
+                        class="text-foreground/80 transition-colors hover:text-primary"
+                    >
                         <UIcon name="i-cib-instagram" class="h-6 w-6" />
                     </ULink>
-                    <ULink to="#" aria-label="TikTok" class="text-foreground/80 transition-colors hover:text-primary">
+                    <ULink
+                        v-if="socialMediaUrls?.tiktok"
+                        :to="socialMediaUrls.tiktok"
+                        target="_blank"
+                        aria-label="TikTok"
+                        class="text-foreground/80 transition-colors hover:text-primary"
+                    >
                         <UIcon name="i-cib-tiktok" class="h-6 w-6" />
                     </ULink>
-                    <ULink to="#" aria-label="YouTube" class="text-foreground/80 transition-colors hover:text-primary">
+                    <ULink
+                        v-if="socialMediaUrls?.youtube"
+                        :to="socialMediaUrls.youtube"
+                        target="_blank"
+                        aria-label="YouTube"
+                        class="text-foreground/80 transition-colors hover:text-primary"
+                    >
                         <UIcon name="i-cib-youtube" class="h-6 w-6" />
                     </ULink>
                 </div>
@@ -69,10 +99,9 @@ const scrollToVideo = () => {
         <!-- Imagen PNG de la persona, centrada abajo -->
         <img
             src="/assets/woman.png"
-            alt="Pilar Trujillo"
+            alt="Pilar Trujillo Martel"
             class="pointer-events-none absolute bottom-0 left-1/2 z-20 h-auto w-auto max-w-xs translate-x-20 select-none md:max-w-md lg:max-w-lg"
             draggable="false"
         />
     </section>
 </template>
-

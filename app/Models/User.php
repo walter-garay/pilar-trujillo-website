@@ -21,7 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'phone',
+        'social_media_urls',
+        'photo_url',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,6 +48,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'social_media_urls' => 'array', // Cast the social_media_urls as an array
         ];
     }
 
