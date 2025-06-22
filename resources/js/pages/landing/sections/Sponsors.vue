@@ -26,7 +26,7 @@ const donationLink = getWhatsAppLink(
 </script>
 
 <template>
-    <section class="bg-muted/50 py-20">
+    <section class="bg-background py-20">
         <div class="mx-auto max-w-5xl px-4">
             <!-- Section Header -->
             <div class="mb-12 text-center">
@@ -41,7 +41,7 @@ const donationLink = getWhatsAppLink(
                 <UCard
                     v-for="sponsor in sponsors"
                     :key="sponsor.id"
-                    class="overflow-hidden text-center transition-transform duration-300 ease-in-out hover:-translate-y-2"
+                    class="overflow-hidden text-center transition-transform duration-300 ease-in-out hover:-translate-y-2 bg-card"
                 >
                     <img :src="sponsor.logo_url" :alt="sponsor.name" class="mb-4 aspect-video w-full rounded-md object-cover" />
                     <h3 class="text-lg font-bold text-foreground">{{ sponsor.name }}</h3>

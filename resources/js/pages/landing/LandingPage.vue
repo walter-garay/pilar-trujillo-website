@@ -27,6 +27,6 @@ console.log('sponsors: ', props.sponsors);
             <MediasOverview :medias="props.medias" />
             <Sponsors :sponsors="props.sponsors" :phone="adminUser?.phone" />
         </main>
-        <Footer :email="adminUser?.email" :phone="adminUser?.phone" />
+        <Footer :email="adminUser?.email" :phone="adminUser?.phone" :social-media-urls="adminUser?.social_media_urls" />
     </div>
 </template>

@@ -2,17 +2,10 @@
 interface Props {
     email?: string;
     phone?: string;
+    socialMediaUrls?: Record<string, string>;
 }
 
-const { email, phone } = defineProps<Props>();
-
-const socialLinks = [
-    { icon: 'i-lucide-facebook', href: '#' },
-    { icon: 'i-lucide-twitter', href: '#' },
-    { icon: 'i-lucide-instagram', href: '#' },
-    { icon: 'i-lucide-linkedin', href: '#' },
-    { icon: 'i-lucide-youtube', href: '#' },
-];
+const { email, phone, socialMediaUrls } = defineProps<Props>();
 
 const quickLinks = [
     { text: 'Sobre Mí', href: '#' },
@@ -41,13 +34,13 @@ const donationLink = getWhatsAppLink(
 </script>
 
 <template>
-    <footer class="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+    <footer class="border-t bg-muted">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
                 <!-- About Section -->
                 <div class="lg:col-span-1">
                     <div class="flex items-center gap-3">
-                        <UAvatar size="md" src="/apple-touch-icon.png" alt="Pilar Trujillo" />
+                        <UAvatar size="md" src="/assets/woman.png" alt="Pilar Trujillo" />
                         <span class="text-xl font-bold text-foreground">Pilar Trujillo</span>
                     </div>
                     <p class="mt-4 text-sm text-muted-foreground">
@@ -56,11 +49,40 @@ const donationLink = getWhatsAppLink(
                     </p>
                     <div class="mt-6 flex gap-3">
                         <UButton
-                            v-for="link in socialLinks"
-                            :key="link.icon"
-                            :to="link.href"
+                            v-if="socialMediaUrls?.facebook"
+                            :to="socialMediaUrls.facebook"
                             target="_blank"
-                            :icon="link.icon"
+                            icon="i-lucide-facebook"
+                            color="neutral"
+                            variant="ghost"
+                            size="lg"
+                            class="rounded-full text-muted-foreground hover:text-foreground"
+                        />
+                        <UButton
+                            v-if="socialMediaUrls?.instagram"
+                            :to="socialMediaUrls.instagram"
+                            target="_blank"
+                            icon="i-lucide-instagram"
+                            color="neutral"
+                            variant="ghost"
+                            size="lg"
+                            class="rounded-full text-muted-foreground hover:text-foreground"
+                        />
+                        <UButton
+                            v-if="socialMediaUrls?.tiktok"
+                            :to="socialMediaUrls.tiktok"
+                            target="_blank"
+                            icon="meteor-icons:tiktok"
+                            color="neutral"
+                            variant="ghost"
+                            size="lg"
+                            class="rounded-full text-muted-foreground hover:text-foreground"
+                        />
+                        <UButton
+                            v-if="socialMediaUrls?.youtube"
+                            :to="socialMediaUrls.youtube"
+                            target="_blank"
+                            icon="i-lucide-youtube"
                             color="neutral"
                             variant="ghost"
                             size="lg"
@@ -109,15 +131,19 @@ const donationLink = getWhatsAppLink(
                         <h3 class="font-semibold text-foreground">Colaborador</h3>
                         <p class="mt-4 text-sm text-muted-foreground">Apoya el periodismo independiente y ayúdame a contar más historias.</p>
                         <div class="mt-4 flex flex-col gap-3">
-                            <UButton :to="collaborationLink" target="_blank" size="md" class="bg-primary text-primary-foreground hover:bg-primary/90"
+                            <UButton
+                                :to="collaborationLink"
+                                target="_blank"
+                                size="md"
+                                class="flex justify-center bg-primary text-primary-foreground hover:bg-primary/90"
                                 >Ser colaborador</UButton
                             >
                             <UButton
                                 :to="donationLink"
                                 target="_blank"
-                                variant="outline"
+                                variant="subtle"
                                 size="md"
-                                class="border-primary text-primary hover:bg-primary/10 dark:border-primary dark:text-primary-foreground dark:hover:bg-primary/80"
+                                class="flex justify-center border-primary font-bold text-primary hover:bg-primary/10"
                                 >Donar</UButton
                             >
                         </div>

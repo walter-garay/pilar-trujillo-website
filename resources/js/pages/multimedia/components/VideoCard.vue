@@ -33,7 +33,7 @@ const thumbnailUrl = computed(() => {
 
 <template>
     <UCard
-        class="group max-w-xs cursor-pointer overflow-hidden rounded-lg bg-card shadow-sm transition-transform duration-300 ease-in-out hover:scale-102"
+        class="group max-w-xs cursor-pointer overflow-hidden rounded-lg bg-card shadow-sm transition-transform duration-300 ease-in-out hover:scale-102" variant="soft"
     >
         <div class="relative">
             <img :src="thumbnailUrl" :alt="props.title" class="m-0 h-40 w-full object-cover p-0" loading="lazy" />
