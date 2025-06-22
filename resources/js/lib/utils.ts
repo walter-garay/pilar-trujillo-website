@@ -14,20 +14,29 @@ export function formatDate(dateString: string | Date | undefined | null): string
     });
 }
 
+/**
+ * Extracts the YouTube video ID from a given URL and returns the embed URL.
+ * Supports both standard YouTube URLs and shortened youtu.be URLs.
+ * If the URL is invalid or does not contain a valid video ID, the original URL is returned.
+ *
+ * @param url - The YouTube video URL to process.
+ * @returns A string representing the YouTube embed URL or the original URL if no valid ID is found.
+ */
 export function getYoutubeEmbedUrl(url: string): string {
-    // Expresión regular para obtener el ID de YouTube de diferentes formatos de URL
-    const youtubeUrlPattern = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/)([a-zA-Z0-9_-]+)|youtu\.be\/([a-zA-Z0-9_-]+))/;
+    let videoId: string | null = null;
 
-    // Intentamos hacer match con la URL
-    const match = url.match(youtubeUrlPattern);
+    try {
+        const parsedUrl = new URL(url);
 
-    // Si encontramos un ID de video en la URL
-    if (match) {
-        // Si encontramos un ID de video en la URL
-        const videoId = match[1] || match[2];
-        return `https://www.youtube.com/embed/${videoId}`;
+        if (parsedUrl.hostname.includes('youtube.com') && parsedUrl.searchParams.has('v')) {
+            videoId = parsedUrl.searchParams.get('v');
+        } else if (parsedUrl.hostname.includes('youtu.be')) {
+            videoId = parsedUrl.pathname.split('/')[1];
+        }
+    } catch (error) {
+        console.error('Error processing the YouTube URL:', error);
     }
 
-    // Si no es una URL de YouTube válida, devolvemos la URL original
-    return url;
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 }
+
