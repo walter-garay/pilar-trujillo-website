@@ -12,9 +12,9 @@
             </div>
             <div class="hidden items-center gap-1 md:flex">
                 <UButton variant="ghost" color="primary" to="#">Reencuentro</UButton>
-                <UButton variant="ghost" color="primary" to="#">Multimedia</UButton>
-                <UButton variant="ghost" color="primary" to="#">Publicaciones</UButton>
-                <UButton variant="ghost" color="primary" to="#">Sponsors</UButton>
+                <UButton variant="ghost" color="primary" to="/multimedia">Multimedia</UButton>
+                <UButton variant="ghost" color="primary" to="/publicaciones">Publicaciones</UButton>
+                <UButton variant="ghost" color="primary" to="#sponsors">Sponsors</UButton>
                 <UButton variant="ghost" color="primary" to="#">Contacto</UButton>
             </div>
         </nav>

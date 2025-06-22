@@ -12,7 +12,7 @@ const quickLinks = [
     { text: 'Reencuentro', href: '#' },
     { text: 'Multimedia', href: '/multimedia' },
     { text: 'Sponsors', href: '#' },
-    { text: 'Prensa', href: '#' },
+    { text: 'Publicaciones', href: '/publicacions' },
     { text: 'Colaboraciones', href: '#' },
 ];
 

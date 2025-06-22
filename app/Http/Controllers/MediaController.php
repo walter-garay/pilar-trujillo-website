@@ -4,15 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MediaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $types = ['television', 'short_video', 'radio', 'podcast', 'audiobook'];
+        $selectedType = $request->get('tab', 'television'); // Default a television
+
+        // Validar que el tipo seleccionado sea válido
+        if (!in_array($selectedType, $types)) {
+            $selectedType = 'television';
+        }
+
+        // Obtener todas las medias del tipo seleccionado con paginación
+        $medias = Media::with('category')
+            ->where('type', $selectedType)
+            ->latest('publication_date')
+            ->paginate(12);
+
+        // Obtener conteos para cada tipo
+        $typeCounts = [];
+        foreach ($types as $type) {
+            $typeCounts[$type] = Media::where('type', $type)->count();
+        }
+
+        return Inertia::render('multimedia/Catalog', [
+            'medias' => $medias,
+            'types' => $types,
+            'selectedType' => $selectedType,
+            'typeCounts' => $typeCounts,
+        ]);
     }
 
     /**
