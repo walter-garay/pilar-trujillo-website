@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { formatDate } from '@/lib/utils';
+import { formatDate, getYoutubeEmbedUrl } from '@/lib/utils';
 import type { Media } from '@/types';
 import { computed } from 'vue';
 
@@ -24,8 +24,7 @@ const isOpen = computed({
 
 const videoUrl = computed(() => {
     if (!props.media?.file_url) return '';
-    const youtubeId = new URL(props.media.file_url).searchParams.get('v');
-    return `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
+    return getYoutubeEmbedUrl(props.media.file_url) + '?autoplay=1&rel=0';
 });
 </script>
 

@@ -39,4 +39,3 @@ export function getYoutubeEmbedUrl(url: string): string {
 
     return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 }
-

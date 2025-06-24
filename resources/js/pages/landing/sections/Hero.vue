@@ -23,10 +23,11 @@ const scrollToVideo = () => {
             <!-- Columna izquierda -->
             <div class="flex flex-1 flex-col justify-center gap-6">
                 <div>
-                    <h1 class="text-5xl leading-tight font-black">Pilar <span class="text-primary">Trujillo Martel</span></h1>
+                    <h1 class="text-5xl leading-tight font-black text-primary">Reencuentro</h1>
+                    <p class="mt-2 text-3xl font-semibold text-foreground/90">Con Pilar Trujillo Martel</p>
                     <p class="mt-4 max-w-xl text-xl text-foreground/80">
-                        Periodista Huanuqueña comprometida con la verdad, conectando historias que transforman y construyen puentes en nuestra
-                        sociedad.
+                        Un espacio para el diálogo y análisis de la realidad de Huánuco y el Perú. Bajo la dirección de la periodista Pilar Trujillo
+                        Martel, "Reencuentro" busca tender puentes y dar voz a nuestra gente.
                     </p>
                 </div>
                 <div class="mt-2 flex gap-6">
@@ -70,29 +71,6 @@ const scrollToVideo = () => {
                 <div class="mt-6 flex gap-4">
                     <UButton color="primary" size="lg" class="px-8" @click="scrollToVideo">Ver Reencuentro</UButton>
                     <UButton color="primary" size="lg" variant="outline" class="px-8" to="#">Conocer más</UButton>
-                </div>
-                <div class="mt-8 flex gap-10">
-                    <div class="flex flex-col items-center gap-2 text-center">
-                        <div class="flex items-center gap-2">
-                            <UIcon name="i-heroicons-trophy" class="h-8 w-8 text-primary" />
-                            <span class="text-2xl font-bold text-foreground">15+</span>
-                        </div>
-                        <span class="text-sm text-foreground/60">Premios de Periodismo</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-2 text-center">
-                        <div class="flex items-center gap-2">
-                            <UIcon name="i-heroicons-calendar-days" class="h-8 w-8 text-primary" />
-                            <span class="text-2xl font-bold text-foreground">20</span>
-                        </div>
-                        <span class="text-sm text-foreground/60">Años de Experiencia</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-2 text-center">
-                        <div class="flex items-center gap-2">
-                            <UIcon name="i-heroicons-microphone" class="h-8 w-8 text-primary" />
-                            <span class="text-2xl font-bold text-foreground">500+</span>
-                        </div>
-                        <span class="text-sm text-foreground/60">Entrevistas Realizadas</span>
-                    </div>
                 </div>
             </div>
         </UContainer>

@@ -27,17 +27,9 @@ class MediaController extends Controller
             ->latest('publication_date')
             ->paginate(12);
 
-        // Obtener conteos para cada tipo
-        $typeCounts = [];
-        foreach ($types as $type) {
-            $typeCounts[$type] = Media::where('type', $type)->count();
-        }
-
         return Inertia::render('multimedia/Catalog', [
             'medias' => $medias,
-            'types' => $types,
             'selectedType' => $selectedType,
-            'typeCounts' => $typeCounts,
         ]);
     }
 

@@ -1,41 +1,15 @@
 <script setup lang="ts">
-import VideoCard from '@/pages/multimedia/components/VideoCard.vue';
-import VideoDialog from '@/pages/multimedia/components/VideoDialog.vue';
+import { useMediaTabs } from '@/composables/useMediaTabs';
+import VideoCard from '@/pages/landing/components/VideoCard.vue';
+import VideoDialog from '@/pages/landing/components/VideoDialog.vue';
 import type { Media } from '@/types';
-import type { TabsItem } from '@nuxt/ui';
 import { ref } from 'vue';
 
 const props = defineProps({
     medias: Object as () => Record<string, Media[]>,
 });
 
-const items = ref<TabsItem[]>([
-    {
-        label: 'Televisión',
-        icon: 'i-lucide-monitor',
-        slot: 'television',
-    },
-    {
-        label: 'Videos Cortos',
-        icon: 'i-lucide-film',
-        slot: 'videos',
-    },
-    {
-        label: 'Radio',
-        icon: 'i-lucide-radio',
-        slot: 'radio',
-    },
-    {
-        label: 'Podcasts',
-        icon: 'i-lucide-mic',
-        slot: 'podcasts',
-    },
-    {
-        label: 'Audiolibros',
-        icon: 'i-lucide-headphones',
-        slot: 'audiolibros',
-    },
-]);
+const { itemsWithSlot: items } = useMediaTabs();
 
 const selectedVideo = ref<Media | null>(null);
 const isModalOpen = ref(false);
@@ -75,16 +49,10 @@ function openVideoModal(video: Media) {
                         </div>
                     </div>
                 </template>
-                <template #videos>
+                <template #short_video>
                     <div class="py-8">
                         <h3 class="mb-2 text-xl font-semibold">Videos Cortos</h3>
                         <p class="mb-4 text-muted-foreground">Clips y videos breves para compartir y disfrutar rápidamente.</p>
-                    </div>
-                </template>
-                <template #publicaciones>
-                    <div class="py-8">
-                        <h3 class="mb-2 text-xl font-semibold">Publicaciones</h3>
-                        <p class="mb-4 text-muted-foreground">Artículos, ensayos y otros textos multimedia.</p>
                     </div>
                 </template>
                 <template #radio>
@@ -93,13 +61,13 @@ function openVideoModal(video: Media) {
                         <p class="mb-4 text-muted-foreground">Programas y entrevistas transmitidas en radio.</p>
                     </div>
                 </template>
-                <template #podcasts>
+                <template #podcast>
                     <div class="py-8">
                         <h3 class="mb-2 text-xl font-semibold">Podcasts</h3>
                         <p class="mb-4 text-muted-foreground">Episodios y series de audio bajo demanda.</p>
                     </div>
                 </template>
-                <template #audiolibros>
+                <template #audiobook>
                     <div class="py-8">
                         <h3 class="mb-2 text-xl font-semibold">Audiolibros</h3>
                         <p class="mb-4 text-muted-foreground">Libros narrados para escuchar en cualquier momento.</p>
