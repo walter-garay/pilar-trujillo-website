@@ -60,6 +60,8 @@ class SponsorSeeder extends Seeder
                 'email' => $faker->companyEmail,
                 'phone' => $faker->phoneNumber,
                 'social_media_urls' => json_encode(['twitter' => 'https://twitter.com/' . $faker->userName]),
+                'promotion_start' => $faker->dateTimeBetween('-1 month', 'now'),
+                'promotion_end' => $faker->dateTimeBetween('now', '+2 months'),
             ]));
         }
     }

@@ -62,4 +62,12 @@ class SponsorController extends Controller
     {
         //
     }
+
+    public function adminIndex()
+    {
+        $sponsors = Sponsor::all();
+        return inertia('admin/sponsors/Management', [
+            'sponsors' => $sponsors,
+        ]);
+    }
 }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone')->nullable(); // Phone number (nullable)
             $table->json('social_media_urls')->nullable(); // Social media URLs (nullable)
             $table->string('media_url')->nullable(); // Media URL (nullable)
+            $table->timestamp('promotion_start')->nullable(); // Inicio de promoción
+            $table->timestamp('promotion_end')->nullable(); // Fin de promoción
             $table->timestamps(); // created_at and updated_at
         });
     }

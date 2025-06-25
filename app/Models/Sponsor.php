@@ -18,6 +18,8 @@ class Sponsor extends Model
         'phone',
         'social_media_urls',
         'media_url',
+        'promotion_start',
+        'promotion_end',
     ];
 
     /**

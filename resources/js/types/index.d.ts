@@ -72,6 +72,8 @@ export interface Sponsor {
     phone: string;
     social_media_urls: string; // JSON string
     media_url: string;
+    promotion_start?: string | null;
+    promotion_end?: string | null;
     created_at: string;
     updated_at: string;
 }

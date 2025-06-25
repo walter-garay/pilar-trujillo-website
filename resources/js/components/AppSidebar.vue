@@ -14,6 +14,11 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+    {
+        title: 'Auspiciadores',
+        href: '/admin/auspiciadores',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
