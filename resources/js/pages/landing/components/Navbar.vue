@@ -41,7 +41,7 @@ const dropdownItems = computed(() =>
         .filter((tab) => !tab.disabled)
         .map((tab) => ({
             label: tab.label,
-            to: `/multimedia?tab=${tab.value}`,
+            to: `/multimedia/${tab.value}`,
             icon: tab.icon,
         })),
 );

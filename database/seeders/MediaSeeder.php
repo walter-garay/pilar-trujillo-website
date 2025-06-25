@@ -36,7 +36,7 @@ class MediaSeeder extends Seeder
                 $description = $faker->paragraph(3);
 
                 $fileUrl = match ($type) {
-                    'television' => 'https://www.youtube.com/watch?v=' . $faker->randomElement(['EgmiczbGo20', 'jyfCuEpF3Cs', 'nISIj0VY3pU', 'dQw4w9WgXcQ', '3tmd-ClpJxA']),
+                    'television' => 'https://www.youtube.com/watch?v=fkEURtfT0a8',
                     'short_video' => 'https://www.youtube.com/shorts/' . $faker->randomElement(['k4y2_DO-6tY', 'm_u6m3-Lq_8', 'lq9v5sD-pYI', '8fW5n4n7Q8U', 'a3ICNMQW7Ok']),
                     'radio', 'podcast', 'audiobook' => 'https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_1MB_MP3.mp3',
                     default => $faker->url,
@@ -52,6 +52,8 @@ class MediaSeeder extends Seeder
                     'category_id' => $mediaCategories->random()->id,
                     'user_id' => $user->id,
                     'tags' => json_encode($faker->words(3)),
+                    'views_count' => $faker->numberBetween(100, 100000),
+                    'likes_count' => $faker->numberBetween(10, 10000),
                 ]);
             }
         }

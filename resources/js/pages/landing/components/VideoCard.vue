@@ -7,6 +7,8 @@ const props = defineProps({
     type: String, // category name
     title: String,
     description: String,
+    viewsCount: Number,
+    likesCount: Number,
 });
 
 const thumbnailUrl = computed(() => {
@@ -36,7 +38,17 @@ const thumbnailUrl = computed(() => {
         </div>
         <div class="p-3">
             <h4 class="mb-1 text-lg font-bold text-foreground">{{ props.title }}</h4>
-            <p class="mb-1 text-sm text-muted-foreground">{{ props.description }}</p>
+            <p class="mb-1 line-clamp-2 text-sm text-muted-foreground">{{ props.description }}</p>
+            <div class="mt-2 flex items-center justify-between text-xs text-muted-foreground">
+                <span class="flex items-center gap-1">
+                    <UIcon name="i-lucide-eye" class="h-4 w-4" />
+                    {{ props.viewsCount?.toLocaleString() ?? 0 }}
+                </span>
+                <span class="flex items-center gap-1">
+                    <UIcon name="i-lucide-thumbs-up" class="h-4 w-4" />
+                    {{ props.likesCount?.toLocaleString() ?? 0 }}
+                </span>
+            </div>
         </div>
     </UCard>
 </template>

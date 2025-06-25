@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Foreign key to Category
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key to User
             $table->json('tags')->nullable(); // Tags as JSON (nullable)
+            $table->unsignedInteger('views_count')->default(0);
+            $table->unsignedInteger('likes_count')->default(0);
             $table->timestamps(); // created_at and updated_at
         });
     }

@@ -38,6 +38,16 @@ const videoUrl = computed(() => {
                     <span v-if="media?.category && media?.publication_date">|</span>
                     <span v-if="media?.publication_date">{{ formatDate(media.publication_date) }}</span>
                 </div>
+                <div class="mt-2 flex items-center gap-4 text-xs text-muted-foreground">
+                    <span v-if="media?.views_count" class="flex items-center gap-1.5">
+                        <UIcon name="i-lucide-eye" class="h-4 w-4" />
+                        {{ media.views_count.toLocaleString() }}
+                    </span>
+                    <span v-if="media?.likes_count" class="flex items-center gap-1.5">
+                        <UIcon name="i-lucide-thumbs-up" class="h-4 w-4" />
+                        {{ media.likes_count.toLocaleString() }}
+                    </span>
+                </div>
             </DialogHeader>
             <div class="aspect-video py-4">
                 <iframe

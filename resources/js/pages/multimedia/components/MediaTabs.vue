@@ -13,8 +13,8 @@ const { items } = useMediaTabs();
 const changeTab = (type: string | number) => {
     if (typeof type === 'string') {
         router.get(
-            '/multimedia',
-            { tab: type },
+            `/multimedia/${type}`,
+            {},
             {
                 preserveState: true,
                 preserveScroll: true,
@@ -26,6 +26,14 @@ const changeTab = (type: string | number) => {
 
 <template>
     <div class="mb-8">
-        <UTabs :items="items" :default-value="props.selectedType" @update:model-value="changeTab" class="w-full" size="lg" color="primary" variant="pill" />
+        <UTabs
+            :items="items"
+            :default-value="props.selectedType"
+            @update:model-value="changeTab"
+            class="w-full"
+            size="lg"
+            color="primary"
+            variant="pill"
+        />
     </div>
 </template>

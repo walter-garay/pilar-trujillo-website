@@ -50,6 +50,8 @@ export interface Media {
     category_id: number;
     user_id: number;
     tags: string; // JSON string
+    views_count: number;
+    likes_count: number;
     created_at: string;
     updated_at: string;
     category?: Category; // Optional relationship

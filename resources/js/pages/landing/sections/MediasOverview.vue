@@ -44,6 +44,8 @@ function openVideoModal(video: Media) {
                                 :title="video.title"
                                 :description="video.description"
                                 :type="video.category?.name"
+                                :views-count="video.views_count"
+                                :likes-count="video.likes_count"
                                 @click="openVideoModal(video)"
                             />
                         </div>

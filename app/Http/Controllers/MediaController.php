@@ -9,27 +9,34 @@ use Inertia\Inertia;
 class MediaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      */
-    public function index(Request $request)
+    public function show(Request $request, string $type, $mediaId = null)
     {
-        $types = ['television', 'short_video', 'radio', 'podcast', 'audiobook'];
-        $selectedType = $request->get('tab', 'television'); // Default a television
+        $types = ['television', 'short_video', 'radio', 'podcast', 'audiobook', 'exclusive'];
+        $selectedType = in_array($type, $types) ? $type : 'television';
 
-        // Validar que el tipo seleccionado sea válido
-        if (!in_array($selectedType, $types)) {
-            $selectedType = 'television';
+        $mediasQuery = Media::with('category')
+            ->where('type', $selectedType)
+            ->latest('publication_date');
+
+        $medias = $mediasQuery->get();
+        $mediaList = $medias->all();
+
+        // Buscar el id solicitado en la lista de medias de ese tipo
+        $selectedMediaId = null;
+        if ($mediaId) {
+            $found = collect($mediaList)->firstWhere('id', (int)$mediaId);
+            $selectedMediaId = $found ? $found->id : null;
+        } else {
+            $selectedMediaId = count($mediaList) > 0 ? $mediaList[0]->id : null;
         }
 
-        // Obtener todas las medias del tipo seleccionado con paginación
-        $medias = Media::with('category')
-            ->where('type', $selectedType)
-            ->latest('publication_date')
-            ->paginate(12);
-
+        $selectedMediaId = $selectedMediaId ?? null;
         return Inertia::render('multimedia/Catalog', [
             'medias' => $medias,
             'selectedType' => $selectedType,
+            'selectedMediaId' => $selectedMediaId,
         ]);
     }
 
@@ -45,14 +52,6 @@ class MediaController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Media $media)
     {
         //
     }
@@ -79,5 +78,34 @@ class MediaController extends Controller
     public function destroy(Media $media)
     {
         //
+    }
+
+    /**
+     * Sumar un like a la media.
+     */
+    public function like(Media $media)
+    {
+        $media->increment('likes_count');
+        return response()->json(['likes_count' => $media->likes_count]);
+    }
+
+    /**
+     * Quitar un like a la media.
+     */
+    public function unlike(Media $media)
+    {
+        if ($media->likes_count > 0) {
+            $media->decrement('likes_count');
+        }
+        return response()->json(['likes_count' => $media->likes_count]);
+    }
+
+    /**
+     * Sumar una vista a la media.
+     */
+    public function addView(Media $media)
+    {
+        $media->increment('views_count');
+        return response()->json(['views_count' => $media->views_count]);
     }
 }

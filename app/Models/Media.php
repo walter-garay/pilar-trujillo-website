@@ -20,6 +20,8 @@ class Media extends Model
         'category_id',
         'user_id',
         'tags',
+        'views_count',
+        'likes_count',
     ];
 
     /**

@@ -1,25 +1,56 @@
 <script setup lang="ts">
 import { formatDate } from '@/lib/utils';
 import type { Media } from '@/types';
-import { router } from '@inertiajs/vue3';
+import { computed, ref, watch } from 'vue';
 
 interface Props {
-    medias: {
-        data: Media[];
-        current_page: number;
-        last_page: number;
-        per_page: number;
-        total: number;
-    };
+    medias: Media[];
     currentType: string;
     selectedMedia: Media | null;
+    selectedMediaId: number | null;
 }
 
 const props = defineProps<Props>();
+console.log('medialist:', props.medias);
 
 const emit = defineEmits<{
     selectMedia: [media: Media];
 }>();
+
+const PAGE_SIZE = 2; // Puedes ajustar el tamaño de página aquí
+const currentPage = ref(1);
+
+// Calcular la página de la media seleccionada al cargar
+watch(
+    [() => props.medias, () => props.selectedMediaId],
+    ([mediaList, selectedId]) => {
+        if (selectedId) {
+            const idx = mediaList.findIndex((m: Media) => m.id === selectedId);
+            if (idx !== -1) {
+                currentPage.value = Math.floor(idx / PAGE_SIZE) + 1;
+            } else {
+                currentPage.value = 1;
+            }
+        } else {
+            currentPage.value = 1;
+        }
+    },
+    { immediate: true },
+);
+
+const pagedMedias = computed(() => {
+    const start = (currentPage.value - 1) * PAGE_SIZE;
+    return props.medias.slice(start, start + PAGE_SIZE);
+});
+
+const totalPages = computed(() => {
+    return Math.ceil(props.medias.length / PAGE_SIZE) || 1;
+});
+
+
+const handleMediaSelect = (media: Media) => {
+    emit('selectMedia', media);
+};
 
 // Función para formatear el tipo para mostrar
 const formatTypeName = (type: string) => {
@@ -29,16 +60,9 @@ const formatTypeName = (type: string) => {
         radio: 'Radio',
         podcast: 'Podcast',
         audiobook: 'Audiolibros',
+        exclusive: 'Exclusivos',
     };
     return names[type as keyof typeof names] || type;
-};
-
-const handleMediaSelect = (media: Media) => {
-    emit('selectMedia', media);
-};
-
-const handlePageChange = (page: number) => {
-    router.get('/multimedia', { tab: props.currentType, page });
 };
 </script>
 
@@ -48,13 +72,13 @@ const handlePageChange = (page: number) => {
             <h2 class="text-xl font-semibold text-foreground">
                 {{ formatTypeName(currentType) }}
             </h2>
-            <p class="text-sm text-muted-foreground">{{ medias.total }} elementos</p>
+            <p class="text-sm text-muted-foreground">{{ medias.length }} elementos</p>
         </div>
 
         <!-- Lista de medias -->
         <div class="space-y-4">
             <UCard
-                v-for="media in medias.data"
+                v-for="media in pagedMedias"
                 :key="media.id"
                 class="group cursor-pointer transition-all duration-200 hover:shadow-lg"
                 :class="{ 'ring-2 ring-primary': selectedMedia?.id === media.id }"
@@ -78,18 +102,26 @@ const handlePageChange = (page: number) => {
                             <span class="text-xs text-muted-foreground">{{ formatDate(media.publication_date) }}</span>
                             <UBadge v-if="media.category" :value="media.category.name" color="primary" variant="soft" size="xs" />
                         </div>
+                        <div class="mt-2 flex items-center gap-4 text-xs text-muted-foreground">
+                            <span class="flex items-center gap-1.5">
+                                <UIcon name="i-lucide-eye" class="h-4 w-4" />
+                                {{ media.views_count?.toLocaleString() }}
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <UIcon name="i-lucide-thumbs-up" class="h-4 w-4" />
+                                {{ media.likes_count?.toLocaleString() }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </UCard>
         </div>
-
-        <!-- Paginación -->
-        <div v-if="medias.last_page > 1" class="mt-8 flex justify-center">
+        <div v-if="totalPages > 1" class="mt-8 flex justify-center">
             <UPagination
-                :total="medias.total"
-                :per-page="medias.per_page"
-                :current-page="medias.current_page"
-                @update:current-page="handlePageChange"
+                v-model:page="currentPage"
+                :total="medias.length"
+                :items-per-page="PAGE_SIZE"
+                :show-controls="true"
             />
         </div>
     </div>
