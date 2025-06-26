@@ -16,8 +16,8 @@ class AdminUserSeeder extends Seeder
     {
         User::create([
             'name' => 'Pilar Trujillo Martel',
-            'email' => 'pilar@trujillo.com',
-            'password' => Hash::make('pilar@admin.2025'),
+            'email' => 'pilar.tmartel@gmail.com',
+            'password' => Hash::make('@yudame//40-mami2'),
             'role' => 'admin',
             'phone' => '+51 993 006 779',
             'social_media_urls' => [

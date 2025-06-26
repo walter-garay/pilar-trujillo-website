@@ -3,6 +3,7 @@
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\PublicationController;
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,7 +23,17 @@ Route::delete('/media/{media}/like', [MediaController::class, 'unlike'])->name('
 Route::post('/media/{media}/view', [MediaController::class, 'addView'])->name('media.addView');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Sponsors admin
     Route::get('/admin/auspiciadores', [SponsorController::class, 'adminIndex'])->name('admin.sponsors');
+    Route::post('/admin/auspiciadores', [SponsorController::class, 'store'])->name('admin.sponsors.store');
+    Route::post('/admin/auspiciadores/{sponsor}', [SponsorController::class, 'update'])->name('admin.sponsors.update');
+    Route::delete('/admin/auspiciadores/{sponsor}', [SponsorController::class, 'destroy'])->name('admin.sponsors.destroy');
+
+    // Publications admin
+    Route::get('/admin/publicaciones', [PublicationController::class, 'adminIndex'])->name('admin.publications');
+    Route::post('/admin/publicaciones', [PublicationController::class, 'store'])->name('admin.publications.store');
+    Route::put('/admin/publicaciones/{publication}', [PublicationController::class, 'update'])->name('admin.publications.update');
+    Route::delete('/admin/publicaciones/{publication}', [PublicationController::class, 'destroy'])->name('admin.publications.destroy');
 });
 
 require __DIR__.'/settings.php';

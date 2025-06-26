@@ -20,6 +20,7 @@ class Sponsor extends Model
         'media_url',
         'promotion_start',
         'promotion_end',
+        'website_url',
     ];
 
     /**

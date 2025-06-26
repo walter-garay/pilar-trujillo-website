@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             MediaSeeder::class,
             SponsorSeeder::class,
+            PublicationSeeder::class,
         ]);
     }
 }

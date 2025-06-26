@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Category of the publication
             $table->json('tags')->nullable(); // Tags related to the publication
             $table->json('references')->nullable(); // References related to the publication
+            $table->unsignedInteger('views_count')->default(0); // Contador de vistas
             $table->timestamps(); // Auto-generated timestamps
         });
     }

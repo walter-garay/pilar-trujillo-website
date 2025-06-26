@@ -19,6 +19,11 @@ const mainNavItems: NavItem[] = [
         href: '/admin/auspiciadores',
         icon: LayoutGrid,
     },
+    {
+        title: 'Publicaciones',
+        href: '/admin/publicaciones',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

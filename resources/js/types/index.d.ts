@@ -60,7 +60,24 @@ export interface Media {
 export interface Category {
     id: number;
     name: string;
-    type: 'media' | 'publication';
+    type: string;
+}
+
+export interface Publication {
+    id: number;
+    title: string;
+    content: string;
+    status: string;
+    author_id: number;
+    category_id: number;
+    tags: string;
+    references?: string;
+    views_count: number;
+    created_at: string;
+    updated_at: string;
+    author?: User | undefined;
+    category?: Category | undefined;
+    images?: { url: string }[];
 }
 
 export interface Sponsor {
@@ -72,6 +89,7 @@ export interface Sponsor {
     phone: string;
     social_media_urls: string; // JSON string
     media_url: string;
+    website_url: string | null;
     promotion_start?: string | null;
     promotion_end?: string | null;
     created_at: string;

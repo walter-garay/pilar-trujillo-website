@@ -17,7 +17,8 @@ class Publication extends Model
         'author_id',
         'category_id',
         'tags',
-        'references'
+        'references',
+        'views_count',
     ];
 
     /**
