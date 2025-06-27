@@ -78,7 +78,7 @@ export interface Publication {
     updated_at: string;
     author?: User | undefined;
     category?: Category | undefined;
-    images?: { url: string }[];
+    images?: { file_url: string }[];
 }
 
 export interface Sponsor {

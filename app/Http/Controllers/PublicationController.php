@@ -35,7 +35,11 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('type', 'publication')->get();
+        return Inertia::render('admin/publications/components/PublicationForm', [
+            'categories' => $categories,
+            'isEdit' => false,
+        ]);
     }
 
     /**
@@ -76,7 +80,13 @@ class PublicationController extends Controller
      */
     public function edit(Publication $publication)
     {
-        //
+        $publication->load(['author', 'category', 'images']);
+        $categories = Category::where('type', 'publication')->get();
+        return Inertia::render('admin/publications/components/PublicationForm', [
+            'publication' => $publication,
+            'categories' => $categories,
+            'isEdit' => true,
+        ]);
     }
 
     /**

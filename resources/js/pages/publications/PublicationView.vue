@@ -127,7 +127,7 @@ const goNext = () => {
             </div>
 
             <!-- Contenido -->
-            <div class="prose prose-lg mb-8 max-w-none text-card-foreground">
+            <div class="publication-content mb-8 max-w-none text-card-foreground">
                 <div v-html="props.publication.content" />
             </div>
 
@@ -186,5 +186,122 @@ const goNext = () => {
     object-fit: contain;
     display: block;
     margin: 0 auto;
+}
+
+/* Estilos para el contenido HTML de Quill */
+.publication-content {
+    line-height: 1.6;
+    color: var(--foreground);
+}
+
+.publication-content h1,
+.publication-content h2,
+.publication-content h3,
+.publication-content h4,
+.publication-content h5,
+.publication-content h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.publication-content h1 {
+    font-size: 2em;
+}
+.publication-content h2 {
+    font-size: 1.75em;
+}
+.publication-content h3 {
+    font-size: 1.5em;
+}
+.publication-content h4 {
+    font-size: 1.25em;
+}
+.publication-content h5 {
+    font-size: 1.125em;
+}
+.publication-content h6 {
+    font-size: 1em;
+}
+
+.publication-content p {
+    margin-bottom: 1em;
+    line-height: 1.7;
+}
+
+.publication-content ul,
+.publication-content ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.publication-content li {
+    margin-bottom: 0.5em;
+}
+
+.publication-content blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid var(--primary);
+    background-color: var(--muted);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+}
+
+.publication-content a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.publication-content a:hover {
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+.publication-content strong {
+    font-weight: 600;
+}
+
+.publication-content em {
+    font-style: italic;
+}
+
+.publication-content u {
+    text-decoration: underline;
+}
+
+.publication-content s {
+    text-decoration: line-through;
+}
+
+.publication-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1em 0;
+}
+
+.publication-content code {
+    background-color: var(--muted);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.publication-content pre {
+    background-color: var(--muted);
+    padding: 1em;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1em 0;
+}
+
+.publication-content pre code {
+    background: none;
+    padding: 0;
 }
 </style>

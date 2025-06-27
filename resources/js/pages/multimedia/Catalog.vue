@@ -45,7 +45,7 @@ const handleMediaSelect = (media: Media) => {
         <!-- Navbar -->
         <Navbar />
 
-        <div class="mx-auto max-w-7xl px-4 py-8 pt-24 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-4 py-8 pt-12 sm:px-6 lg:px-8">
             <!-- Tabs de navegación -->
             <MediaTabs :selected-type="props.selectedType" />
 

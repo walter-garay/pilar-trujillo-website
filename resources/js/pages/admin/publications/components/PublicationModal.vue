@@ -144,7 +144,6 @@ const onSubmit = () => {
 };
 
 const categoryItems = computed(() => props.categories.map((c) => ({ label: c.name, id: c.id })));
-const userItems = computed(() => props.users.map((u) => ({ label: u.name, value: u.id })));
 </script>
 
 <template>

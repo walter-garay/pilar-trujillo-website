@@ -109,10 +109,6 @@ const goToPublication = (id: number) => {
                 </template>
 
                 <div class="space-y-3">
-                    <p class="line-clamp-3 text-sm text-muted-foreground">
-                        {{ publication.content }}
-                    </p>
-
                     <!-- Fuente -->
                     <div v-if="publication.references" class="text-xs text-muted-foreground">
                         <span v-if="JSON.parse(publication.references).name"> Publicado en: {{ JSON.parse(publication.references).name }} </span>

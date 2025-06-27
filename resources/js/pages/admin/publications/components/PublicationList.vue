@@ -7,11 +7,7 @@ interface Props {
     publications: Publication[];
 }
 
-
 const props = defineProps<Props>();
-const emit = defineEmits(['edit']);
-
-const handleEdit = (publication: Publication) => emit('edit', publication);
 
 // Estado para el modal de confirmación
 const showConfirm = ref(false);
@@ -58,6 +54,10 @@ const cancelDelete = () => {
     showConfirm.value = false;
     publicationToDelete.value = null;
 };
+
+const goToEdit = (publication: Publication) => {
+    router.visit(route('admin.publications.edit', publication.id));
+};
 </script>
 
 <template>
@@ -82,14 +82,13 @@ const cancelDelete = () => {
                     <div v-if="pub.tags" class="mt-1 flex flex-wrap gap-1">
                         <UBadge v-for="tag in JSON.parse(pub.tags)" :key="tag" color="neutral" variant="soft">#{{ tag }}</UBadge>
                     </div>
-                    <p class="mt-2 line-clamp-3 text-sm text-muted-foreground">{{ pub.content }}</p>
                     <div v-if="pub.references" class="mt-2 text-xs text-muted-foreground">
                         <span v-if="JSON.parse(pub.references).name">📚 Fuente: {{ JSON.parse(pub.references).name }}</span>
                     </div>
                 </div>
                 <div class="mt-4 flex justify-end gap-2">
                     <UButton color="error" variant="soft" @click="handleDelete(pub)">Eliminar</UButton>
-                    <UButton color="primary" variant="soft" @click="handleEdit(pub)">Editar</UButton>
+                    <UButton color="primary" variant="soft" @click="goToEdit(pub)">Editar</UButton>
                 </div>
             </UCard>
         </div>

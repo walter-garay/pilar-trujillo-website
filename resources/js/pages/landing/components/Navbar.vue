@@ -39,7 +39,7 @@
         </nav>
     </header>
     <!-- Franja negra con logo centrado, fuera del header -->
-    <div class="mx-40 flex w-full items-center justify-center rounded-lg bg-black shadow-lg shadow-black/60" style="margin: 0 auto">
+    <div class="mx-40 flex w-full items-center justify-center rounded-lg bg-black shadow-md shadow-gray-400" style="margin: 0 auto">
         <img src="/assets/images/brand/logotipo.png" alt="Reencuentro" class="mx-auto h-8 w-auto py-2" />
     </div>
 </template>
