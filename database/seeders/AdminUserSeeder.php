@@ -26,7 +26,7 @@ class AdminUserSeeder extends Seeder
                 'instagram' => 'https://instagram.com/pilartrujillo',
                 'youtube' => 'https://www.youtube.com/@reencuentro-pilartrujillom7251'
             ],
-            'photo_url' => '/assets/woman.png',
+            'photo_url' => '/assets/images/pilar/perfil.png',
             'email_verified_at' => now(),
         ]);
     }

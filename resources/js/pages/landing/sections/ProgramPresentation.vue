@@ -35,13 +35,13 @@ const toggleMute = () => {
         </button>
         <!-- Overlay Content -->
         <div class="relative z-20 flex flex-col items-center justify-center p-4 text-center text-white">
-            <img src="/assets/images/brand/isotipo.png" alt="Reencuentro" class="mb-6 h-32 w-32 object-contain" />
-            <h1 class="text-6xl leading-tight font-black drop-shadow-lg">Reencuentro</h1>
-            <p class="mt-4 max-w-2xl text-xl drop-shadow">
-                Un programa que explora las historias humanas de reconciliación, perdón y segundas oportunidades.
+            <img src="/assets/images/brand/isotipo.png" alt="Reencuentro" class="mb-6 w-40 object-contain" />
+            <img src="/assets/images/brand/logotipo.png" alt="Reencuentro logotipo" class="mb-6 h-40 w-auto object-contain" />
+            <p class="mt-4 max-w-xl text-xl drop-shadow">
+                Reencuentro, una dimensión simbólica de rescate, revaloración y diálogo cultural, que fomenta el amor por Huánuco, como motor de su desarrollo. Una gravitante y maravillosa tarea.
             </p>
             <div class="mt-6 flex flex-col items-center gap-4">
-                <UBadge color="neutral" variant="solid" size="lg">Sábados y domingos de 7PM a 8PM</UBadge>
+                <UBadge color="neutral" variant="solid" size="lg">Sábados y domingos de 7 p.m. a 8 p.m.</UBadge>
                 <UButton color="primary" size="lg" to="/multimedia/television">Ver último programa</UButton>
             </div>
         </div>

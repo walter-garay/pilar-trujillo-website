@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
+import { defineEmits, defineProps, ref } from 'vue';
 
 interface Media {
     id: number;
@@ -15,10 +15,24 @@ interface Media {
     likes_count: number;
 }
 
+
 const props = defineProps<{ medias: Media[] }>();
+
+console.log()
+
 const emit = defineEmits(['edit']);
 
 const handleEdit = (media: Media) => emit('edit', media);
+
+const copiedId = ref<number | null>(null);
+function copyLink(id: number) {
+    const url = `/multimedia/television/${id}`;
+    navigator.clipboard.writeText(url);
+    copiedId.value = id;
+    setTimeout(() => {
+        copiedId.value = null;
+    }, 1500);
+}
 </script>
 
 <template>
@@ -36,6 +50,10 @@ const handleEdit = (media: Media) => emit('edit', media);
                 </div>
                 <div class="mt-4 flex justify-end gap-2">
                     <UButton color="primary" variant="soft" @click="handleEdit(media)">Editar</UButton>
+                    <UButton v-if="media.type === 'exclusive'" color="primary" variant="outline" @click="copyLink(media.id)">
+                        <span v-if="copiedId === media.id">¡Copiado!</span>
+                        <span v-else>Copiar link</span>
+                    </UButton>
                 </div>
             </UCard>
         </div>

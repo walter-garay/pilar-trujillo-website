@@ -57,8 +57,7 @@ onUnmounted(() => {
                     <img src="/assets/images/brand/imagotipo_name_left.png" alt="Reencuentro" class="w-92" />
 
                     <p class="mt-10 max-w-xl pr-36 text-xl text-foreground/80">
-                        Un espacio para el diálogo y análisis de la realidad de Huánuco y el Perú. Bajo la dirección de la periodista Pilar Trujillo
-                        Martel, "Reencuentro" busca tender puentes y dar voz a nuestra gente.
+                        Un medio que se expresa a través de quienes fueron protagonistas de su historia, para nutrir al hombre de hoy, ante los grandes retos como el de construir un futuro memorioso, innovador, esencialmente humanista.
                     </p>
                 </div>
                 <div class="mt-2 flex gap-6">

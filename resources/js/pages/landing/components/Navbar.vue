@@ -2,8 +2,10 @@
     <header class="w-full border-b border-border/20 bg-[#fcc633] shadow">
         <nav class="mx-auto flex h-12 max-w-7xl items-center justify-center px-4">
             <div class="hidden items-center gap-8 md:flex">
-                <UButton variant="ghost" class="font-bold text-black" color="primary" to="/">Reencuentro</UButton>
-                <UButton variant="ghost" class="font-bold text-black" color="primary" to="/publicaciones">Publicaciones</UButton>
+                <UButton variant="ghost" class="font-bold text-black underline-offset-4 hover:underline" color="primary" to="/">Reencuentro</UButton>
+                <UButton variant="ghost" class="font-bold text-black underline-offset-4 hover:underline" color="primary" to="/publicaciones"
+                    >Publicaciones</UButton
+                >
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <UButton
@@ -16,7 +18,12 @@
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                         <DropdownMenuItem v-for="item in dropdownItems" :key="item.to" as-child>
-                            <UButton variant="ghost" color="primary" :to="item.to" class="w-full justify-start text-black">
+                            <UButton
+                                variant="ghost"
+                                color="primary"
+                                :to="item.to"
+                                class="w-full justify-start text-black underline-offset-4 hover:underline"
+                            >
                                 <UIcon :name="item.icon" class="mr-2 h-4 w-4" />
                                 {{ item.label }}
                             </UButton>

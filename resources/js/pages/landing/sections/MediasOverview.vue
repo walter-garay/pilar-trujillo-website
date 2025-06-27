@@ -13,6 +13,7 @@ const { itemsWithSlot: items } = useMediaTabs();
 
 const selectedVideo = ref<Media | null>(null);
 const isModalOpen = ref(false);
+const selectedTab = ref('television');
 
 function openVideoModal(video: Media) {
     selectedVideo.value = video;
@@ -28,11 +29,11 @@ function openVideoModal(video: Media) {
                     <span class="text-foreground">Catálogo</span>
                     <span class="text-primary"> Multimedia</span>
                 </h2>
-                <p class="mx-auto max-w-2xl text-lg text-muted-foreground">
+                <p class="textsmuted-foreground mx-auto max-w-2xl text-lg">
                     Explora todo mi contenido organizado por categorías para encontrar exactamente lo que buscas
                 </p>
             </div>
-            <UTabs :items="items" class="w-full space-y-8" size="lg" color="primary" variant="pill">
+            <UTabs :items="items" v-model="selectedTab" class="w-full space-y-8" size="lg" color="primary" variant="pill">
                 <template #television>
                     <div class="flex flex-col items-center gap-8">
                         <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -52,30 +53,81 @@ function openVideoModal(video: Media) {
                     </div>
                 </template>
                 <template #short_video>
-                    <div class="py-8">
-                        <h3 class="mb-2 text-xl font-semibold">Videos Cortos</h3>
-                        <p class="mb-4 text-muted-foreground">Clips y videos breves para compartir y disfrutar rápidamente.</p>
+                    <div class="flex flex-col items-center gap-8">
+                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <VideoCard
+                                v-for="video in props.medias?.short_video"
+                                :key="video.id"
+                                :file-url="video.file_url"
+                                :cover-image-url="video.cover_image_url"
+                                :title="video.title"
+                                :description="video.description"
+                                :type="video.category?.name"
+                                :views-count="video.views_count"
+                                :likes-count="video.likes_count"
+                                @click="openVideoModal(video)"
+                            />
+                        </div>
                     </div>
                 </template>
                 <template #radio>
-                    <div class="py-8">
-                        <h3 class="mb-2 text-xl font-semibold">Radio</h3>
-                        <p class="mb-4 text-muted-foreground">Programas y entrevistas transmitidas en radio.</p>
+                    <div class="flex flex-col items-center gap-8">
+                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <VideoCard
+                                v-for="video in props.medias?.radio"
+                                :key="video.id"
+                                :file-url="video.file_url"
+                                :cover-image-url="video.cover_image_url"
+                                :title="video.title"
+                                :description="video.description"
+                                :type="video.category?.name"
+                                :views-count="video.views_count"
+                                :likes-count="video.likes_count"
+                                @click="openVideoModal(video)"
+                            />
+                        </div>
                     </div>
                 </template>
                 <template #podcast>
-                    <div class="py-8">
-                        <h3 class="mb-2 text-xl font-semibold">Podcasts</h3>
-                        <p class="mb-4 text-muted-foreground">Episodios y series de audio bajo demanda.</p>
+                    <div class="flex flex-col items-center gap-8">
+                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <VideoCard
+                                v-for="video in props.medias?.podcast"
+                                :key="video.id"
+                                :file-url="video.file_url"
+                                :cover-image-url="video.cover_image_url"
+                                :title="video.title"
+                                :description="video.description"
+                                :type="video.category?.name"
+                                :views-count="video.views_count"
+                                :likes-count="video.likes_count"
+                                @click="openVideoModal(video)"
+                            />
+                        </div>
                     </div>
                 </template>
                 <template #audiobook>
-                    <div class="py-8">
-                        <h3 class="mb-2 text-xl font-semibold">Audiolibros</h3>
-                        <p class="mb-4 text-muted-foreground">Libros narrados para escuchar en cualquier momento.</p>
+                    <div class="flex flex-col items-center gap-8">
+                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <VideoCard
+                                v-for="video in props.medias?.audiobook"
+                                :key="video.id"
+                                :file-url="video.file_url"
+                                :cover-image-url="video.cover_image_url"
+                                :title="video.title"
+                                :description="video.description"
+                                :type="video.category?.name"
+                                :views-count="video.views_count"
+                                :likes-count="video.likes_count"
+                                @click="openVideoModal(video)"
+                            />
+                        </div>
                     </div>
                 </template>
             </UTabs>
+            <div class="flex w-full justify-center">
+                <UButton class="mt-8" color="primary" size="lg" :to="`/multimedia/${selectedTab}`">Ver catálogo completo</UButton>
+            </div>
         </div>
     </section>
     <VideoDialog v-model="isModalOpen" :media="selectedVideo" />

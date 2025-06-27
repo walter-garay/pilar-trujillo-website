@@ -28,10 +28,10 @@ class MediaSeeder extends Seeder
             return;
         }
 
-        $mediaTypes = ['television', 'short_video', 'radio', 'podcast', 'audiobook'];
+        $mediaTypes = ['television', 'short_video', 'radio', 'podcast', 'audiobook', 'exclusive'];
 
         foreach ($mediaTypes as $type) {
-            for ($i = 0; $i < 5; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $title = $faker->sentence(4);
                 $description = $faker->paragraph(3);
 
@@ -39,6 +39,7 @@ class MediaSeeder extends Seeder
                     'television' => 'https://www.youtube.com/watch?v=fkEURtfT0a8',
                     'short_video' => 'https://www.youtube.com/shorts/' . $faker->randomElement(['k4y2_DO-6tY', 'm_u6m3-Lq_8', 'lq9v5sD-pYI', '8fW5n4n7Q8U', 'a3ICNMQW7Ok']),
                     'radio', 'podcast', 'audiobook' => 'https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_1MB_MP3.mp3',
+                    'exclusive' => 'https://www.youtube.com/watch?v=exclusive_' . $i,
                     default => $faker->url,
                 };
 
