@@ -9,7 +9,7 @@ const expanded2 = ref(false);
     <section class="relative flex min-h-screen w-full items-center justify-center bg-background py-16">
         <UContainer class="flex w-full flex-col gap-12">
             <!-- Fila 1: Biografía de Pilar Trujillo -->
-            <UCard class="flex w-full flex-col items-center justify-center gap-6 bg-muted p-8 shadow-xl">
+            <UCard class="flex w-full flex-col items-center justify-center gap-6 bg-card p-8 shadow-xl">
                 <!-- Galería de fotos de Pilar -->
                 <div class="mb-4 flex w-full flex-row flex-wrap justify-center gap-4">
                     <img src="/assets/images/pilar/1.jpg" alt="Pilar 1" class="h-32 w-32 rounded-xl object-cover shadow" />
@@ -33,6 +33,7 @@ const expanded2 = ref(false);
                             cultura y la radiodifusión, marcan la pauta en su vida. El primer atisbo sería el periódico mural a su cargo en el Colegio
                             María Auxiliadora de nuestra ciudad.
                         </p>
+                        <img src="/assets/images/pilar/5.jpg" alt="Pilar joven" class="mx-auto my-2 w-2/3 rounded-xl object-cover shadow md:w-1/2" />
                         <p>
                             En 1985, casi al culminar la carrera de Guía Oficial de Turismo en el Instituto Superior Tecnológico Aparicio Pomares,
                             asumió como vital la tarea de fomentar la trascendencia cultural y socioeconómica del turismo, por ello se capacitó en
@@ -73,6 +74,11 @@ const expanded2 = ref(false);
                             lugar hace 13 años en Cable Visión Huánuco Canal 21, hoy en CTV Continental Televisión Canal 25 UHF ubicándose como uno de
                             los de mayor sintonía dentro de su programación.
                         </p>
+                        <img
+                            src="/assets/images/pilar/6.jpg"
+                            alt="Pilar reportera"
+                            class="mx-auto my-2 w-2/3 rounded-xl object-cover shadow md:w-1/2"
+                        />
                         <p>
                             Esta realidad profesional –creativa, ética y comprometida– ha contribuido a fomentar y fortalecer la valoración por
                             nuestro patrimonio material e inmaterial regional. Por otra parte, ha motivado el asumir la cultura como un camino hacia
@@ -92,7 +98,7 @@ const expanded2 = ref(false);
                 </div>
             </UCard>
             <!-- Fila 2: Reencuentro -->
-            <UCard class="flex w-full flex-col items-center justify-center gap-6 bg-muted p-8 shadow-xl">
+            <UCard class="flex w-full flex-col items-center justify-center gap-6 bg-card p-8 shadow-xl">
                 <!-- Galería de fotos de Reencuentro -->
                 <div class="mb-4 flex w-full flex-row flex-wrap justify-center gap-4">
                     <img src="/assets/images/gallery/1.jpg" alt="Reencuentro 1" class="h-32 w-32 rounded-xl object-cover shadow" />
