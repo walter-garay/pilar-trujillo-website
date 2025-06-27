@@ -6,8 +6,9 @@
         ]"
     >
         <nav class="mx-auto flex h-16 max-w-7xl items-center justify-center px-4">
-            <div class="hidden items-center gap-1 md:flex">
-                <UButton variant="ghost" color="primary" to="#">Reencuentro</UButton>
+            <div class="hidden items-center gap-8 md:flex">
+                <UButton variant="ghost" color="primary" to="/">Reencuentro</UButton>
+                <UButton variant="ghost" color="primary" to="/publicaciones">Publicaciones</UButton>
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <UButton color="primary" variant="ghost" label="Multimedia" trailing-icon="i-heroicons-chevron-down-20-solid" />
@@ -21,9 +22,8 @@
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <UButton variant="ghost" color="primary" to="/publicaciones">Publicaciones</UButton>
-                <UButton variant="ghost" color="primary" to="#sponsors">Sponsors</UButton>
-                <UButton variant="ghost" color="primary" to="#">Contacto</UButton>
+
+                <!-- <UButton variant="ghost" color="primary" to="">Auspiciadores</UButton> -->
             </div>
         </nav>
     </header>

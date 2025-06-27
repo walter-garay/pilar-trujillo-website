@@ -24,6 +24,11 @@ const mainNavItems: NavItem[] = [
         href: '/admin/publicaciones',
         icon: LayoutGrid,
     },
+    {
+        title: 'Multimedia',
+        href: '/admin/multimedia',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

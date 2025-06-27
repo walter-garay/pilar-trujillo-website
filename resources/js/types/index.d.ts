@@ -31,6 +31,7 @@ export interface User {
     email: string;
     avatar?: string;
     phone?: string;
+    photo_url?: string | null;
     social_media_urls?: Record<string, string>;
     email_verified_at: string | null;
     created_at: string;

@@ -53,7 +53,16 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'type' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'file_url' => 'nullable|string',
+            'publication_date' => 'nullable|date',
+        ]);
+        Media::create($validated);
+        return redirect()->route('admin.medias')->with('success', 'Media creada exitosamente.');
     }
 
     /**
@@ -69,7 +78,16 @@ class MediaController extends Controller
      */
     public function update(Request $request, Media $media)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'type' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'file_url' => 'nullable|string',
+            'publication_date' => 'nullable|date',
+        ]);
+        $media->update($validated);
+        return redirect()->route('admin.medias')->with('success', 'Media actualizada exitosamente.');
     }
 
     /**
@@ -77,7 +95,8 @@ class MediaController extends Controller
      */
     public function destroy(Media $media)
     {
-        //
+        $media->delete();
+        return redirect()->route('admin.medias')->with('success', 'Media eliminada exitosamente.');
     }
 
     /**
@@ -107,5 +126,16 @@ class MediaController extends Controller
     {
         $media->increment('views_count');
         return response()->json(['views_count' => $media->views_count]);
+    }
+
+    /**
+     * Mostrar el listado de medias para el admin.
+     */
+    public function adminIndex()
+    {
+        $medias = Media::with('category')->latest('publication_date')->get();
+        return Inertia::render('admin/multimedia/Management', [
+            'medias' => $medias,
+        ]);
     }
 }

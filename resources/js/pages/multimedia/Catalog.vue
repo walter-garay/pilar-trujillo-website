@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Navbar from '@/pages/landing/components/Navbar.vue';
+import Footer from '@/pages/landing/sections/Footer.vue';
 import type { Media } from '@/types';
 import { ref, watch } from 'vue';
 import MediaList from './components/MediaList.vue';
@@ -40,7 +42,10 @@ const handleMediaSelect = (media: Media) => {
 
 <template>
     <div class="min-h-screen bg-background">
-        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <!-- Navbar -->
+        <Navbar />
+
+        <div class="mx-auto max-w-7xl px-4 py-8 pt-24 sm:px-6 lg:px-8">
             <!-- Tabs de navegación -->
             <MediaTabs :selected-type="props.selectedType" />
 
@@ -62,5 +67,8 @@ const handleMediaSelect = (media: Media) => {
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <Footer />
     </div>
 </template>

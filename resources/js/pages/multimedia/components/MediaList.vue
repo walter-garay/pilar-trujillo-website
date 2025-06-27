@@ -17,7 +17,7 @@ const emit = defineEmits<{
     selectMedia: [media: Media];
 }>();
 
-const PAGE_SIZE = 2; // Puedes ajustar el tamaño de página aquí
+const PAGE_SIZE = 5; // Puedes ajustar el tamaño de página aquí
 const currentPage = ref(1);
 
 // Calcular la página de la media seleccionada al cargar

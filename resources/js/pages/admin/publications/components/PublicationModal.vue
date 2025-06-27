@@ -15,7 +15,6 @@ watch(
 
 watch(internalOpen, (val) => emit('update:open', val));
 
-const val1 = ref(['Vue']);
 const isEdit = computed(() => !!props.publication && !!props.publication.id);
 
 const state = ref<{
@@ -25,7 +24,8 @@ const state = ref<{
     author_id: number | undefined;
     category_id: number;
     tags: string[];
-    references: string[];
+    source_name: string;
+    source_url: string;
     views_count: number;
     id: number | undefined;
 }>({
@@ -35,7 +35,8 @@ const state = ref<{
     author_id: 1,
     category_id: props.categories.length ? props.categories[0].id : 1,
     tags: [],
-    references: [],
+    source_name: '',
+    source_url: '',
     views_count: 0,
     id: undefined,
 });
@@ -44,18 +45,21 @@ watch(
     () => props.publication,
     (publication) => {
         if (publication) {
+            const references = publication.references
+                ? Array.isArray(publication.references)
+                    ? publication.references
+                    : JSON.parse(publication.references)
+                : {};
+
             state.value = {
                 title: publication.title || '',
                 content: publication.content || '',
                 status: publication.status || 'active',
                 author_id: publication.author_id || undefined,
                 category_id: publication.category_id || (props.categories.length ? props.categories[0].id : 1),
-                tags: publication.tags ? (Array.isArray(publication.tags) ? publication.tags : JSON.parse(publication.tags)) : [],
-                references: publication.references
-                    ? Array.isArray(publication.references)
-                        ? publication.references
-                        : JSON.parse(publication.references)
-                    : [],
+                tags: Array.isArray(publication.tags) ? publication.tags : JSON.parse(publication.tags || '[]'),
+                source_name: references.name || '',
+                source_url: references.url || '',
                 views_count: publication.views_count || 0,
                 id: publication.id,
             };
@@ -67,7 +71,8 @@ watch(
                 author_id: undefined,
                 category_id: props.categories.length ? props.categories[0].id : 1,
                 tags: [],
-                references: [],
+                source_name: '',
+                source_url: '',
                 views_count: 0,
                 id: undefined,
             };
@@ -86,7 +91,10 @@ const onSubmit = () => {
         author_id: state.value.author_id,
         category_id: state.value.category_id,
         tags: JSON.stringify(state.value.tags),
-        references: JSON.stringify(state.value.references),
+        references: JSON.stringify({
+            name: state.value.source_name,
+            url: state.value.source_url,
+        }),
         views_count: state.value.views_count,
     };
 
@@ -140,57 +148,62 @@ const userItems = computed(() => props.users.map((u) => ({ label: u.name, value:
 </script>
 
 <template>
-    <UModal v-model:open="internalOpen" fullscreen :title="isEdit ? 'Editar publicación' : 'Agregar publicación'">
-        <template #content>
-            <div class="mx-auto w-full max-w-2xl p-6">
-                <h2 class="mb-6 text-center text-xl font-bold">
-                    {{ isEdit ? 'Editar publicación' : 'Agregar publicación' }}
-                </h2>
-                <UForm :state="state" class="space-y-4" @submit="onSubmit">
-                    <UFormField label="Título" name="title">
-                        <UInput v-model="state.title" required class="w-full" />
-                    </UFormField>
+    <UModal v-model:open="internalOpen" fullscreen :title="isEdit ? 'Editar publicación' : 'Agregar publicación'" :class="'z-[1200]'">
+        <template #body>
+            <div class="mx-auto flex min-h-full w-full max-w-2xl items-center justify-center p-6">
+                <div class="w-full">
+                    <UForm :state="state" class="space-y-4" @submit="onSubmit">
+                        <UFormField label="Título" name="title">
+                            <UInput v-model="state.title" required class="w-full" />
+                        </UFormField>
 
-                    <UFormField label="Contenido" name="content">
-                        <UTextarea v-model="state.content" class="min-h-[120px] w-full" />
-                    </UFormField>
+                        <UFormField label="Contenido" name="content">
+                            <UTextarea v-model="state.content" class="min-h-[120px] w-full" />
+                        </UFormField>
 
-                    <UFormField label="Estado" name="status">
-                        <USelect
-                            v-model="state.status"
-                            :items="[
-                                { label: 'Activo', value: 'active' },
-                                { label: 'Archivado', value: 'archived' },
-                            ]"
-                            class="w-full"
-                        />
-                    </UFormField>
+                        <UFormField label="Estado" name="status">
+                            <USelect
+                                v-model="state.status"
+                                :items="[
+                                    { label: 'Activo', value: 'active' },
+                                    { label: 'Archivado', value: 'archived' },
+                                ]"
+                                class="w-full"
+                            />
+                        </UFormField>
 
-                    <UFormField label="Categoría" name="category_id">
-                        <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" />
-                    </UFormField>
+                        <UFormField label="Categoría" name="category_id">
+                            <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" />
+                        </UFormField>
 
-                    <UFormField label="Autor" name="author_id">
-                        <USelect v-model="state.author_id" :items="userItems" class="w-full" />
-                    </UFormField>
+                        <UFormField label="Autor" name="author_id">
+                            <USelect v-model="state.author_id" :items="userItems" class="w-full" />
+                        </UFormField>
 
-                    <UFormField label="Etiquetas (tags)" name="tags">
-                        <UInputTags v-model="val1" class="w-full" />
-                    </UFormField>
+                        <UFormField label="Etiquetas (tags)" name="tags">
+                            <UInputTags v-model="state.tags" class="w-full" />
+                        </UFormField>
 
-                    <UFormField label="Referencias" name="references">
-                        <UInputTags v-model="state.references" class="w-full" />
-                    </UFormField>
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-medium">Fuente</h3>
+                            <UFormField label="Nombre de la fuente" name="source_name">
+                                <UInput v-model="state.source_name" placeholder="Nombre de la fuente" class="w-full" />
+                            </UFormField>
+                            <UFormField label="Link de la fuente" name="source_url">
+                                <UInput v-model="state.source_url" placeholder="Link de la fuente" class="w-full" />
+                            </UFormField>
+                        </div>
 
-                    <UFormField v-if="isEdit" label="Vistas" name="views_count">
-                        <UInput v-model="state.views_count" class="w-full" readonly />
-                    </UFormField>
+                        <UFormField v-if="isEdit" label="Vistas" name="views_count">
+                            <UInput v-model="state.views_count" class="w-full" readonly />
+                        </UFormField>
 
-                    <div class="mt-6 flex justify-end gap-2">
-                        <UButton type="button" color="neutral" variant="outline" @click="emit('update:open', false)">Cancelar</UButton>
-                        <UButton type="submit" color="primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</UButton>
-                    </div>
-                </UForm>
+                        <div class="mt-6 flex justify-end gap-2">
+                            <UButton type="button" color="neutral" variant="outline" @click="emit('update:open', false)">Cancelar</UButton>
+                            <UButton type="submit" color="primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</UButton>
+                        </div>
+                    </UForm>
+                </div>
             </div>
         </template>
     </UModal>

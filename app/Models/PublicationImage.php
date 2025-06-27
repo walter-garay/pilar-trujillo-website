@@ -9,6 +9,9 @@ class PublicationImage extends Model
 {
     use HasFactory;
 
+    // Deshabilitar los timestamps automáticos
+    public $timestamps = false;
+
     // Define the attributes that can be mass-assigned
     protected $fillable = [
         'publication_id',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publication;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,17 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+        $publications = Publication::with(['author', 'category', 'images'])
+            ->where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $categories = Category::where('type', 'publication')->get();
+
+        return Inertia::render('publications/Catalog', [
+            'publications' => $publications,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -50,7 +61,10 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
-        //
+        $publication->load(['author', 'category', 'images']);
+        return Inertia::render('publications/PublicationView', [
+            'publication' => $publication,
+        ]);
     }
 
     /**

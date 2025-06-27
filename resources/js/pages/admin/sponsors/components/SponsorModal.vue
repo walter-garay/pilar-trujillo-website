@@ -149,61 +149,60 @@ const onSubmit = () => {
 </script>
 
 <template>
-    <UModal v-model:open="internalOpen" :title="isEdit ? 'Editar auspiciador' : 'Agregar auspiciador'">
-        <template #content>
-            <div class="w-full max-w-lg p-6">
-                <h2 class="mb-6 text-center text-xl font-bold">
-                    {{ isEdit ? 'Editar auspiciador' : 'Agregar auspiciador' }}
-                </h2>
-                <UForm :state="state" class="space-y-4" @submit="onSubmit">
-                    <UFormField label="Nombre" name="name">
-                        <UInput v-model="state.name" required class="w-full" />
-                    </UFormField>
-
-                    <UFormField label="Logo" name="logo">
-                        <input type="file" accept="image/*" @change="handleFileChange" class="w-full" />
-                    </UFormField>
-
-                    <UFormField label="Descripción corta" name="description">
-                        <UInput v-model="state.description" class="w-full" />
-                    </UFormField>
-
-                    <UFormField label="Email" name="email">
-                        <UInput v-model="state.email" type="email" class="w-full" />
-                    </UFormField>
-
-                    <div class="flex flex-col gap-4 md:flex-row">
-                        <UFormField label="Número de contacto" name="phone" class="flex-1">
-                            <UInput v-model="state.phone" class="w-full" />
+    <UModal v-model:open="internalOpen" :title="isEdit ? 'Editar auspiciador' : 'Agregar auspiciador'" fullscreen :class="'z-[1200]'">
+        <template #body>
+            <div class="mx-auto flex min-h-full w-full max-w-lg items-center justify-center p-6">
+                <div class="w-full">
+                    <UForm :state="state" class="space-y-4" @submit="onSubmit">
+                        <UFormField label="Nombre" name="name">
+                            <UInput v-model="state.name" required class="w-full" />
                         </UFormField>
-                        <UFormField label="Link del anuncio o imagen" name="media_url" class="flex-1">
-                            <UInput v-model="state.media_url" class="w-full" />
-                        </UFormField>
-                    </div>
-                    <UFormField label="Sitio web" name="website_url">
-                        <UInput v-model="state.website_url" class="w-full" />
-                    </UFormField>
 
-                    <div class="flex flex-col gap-4 md:flex-row">
-                        <UFormField label="Inicio del auspicio" name="promotion_start" class="flex-1">
-                            <UInput v-model="state.promotion_start" type="datetime-local" class="w-full" />
+                        <UFormField label="Logo" name="logo">
+                            <input type="file" accept="image/*" @change="handleFileChange" class="w-full" />
                         </UFormField>
-                        <UFormField label="Fin del auspicio" name="promotion_end" class="flex-1">
-                            <UInput v-model="state.promotion_end" type="datetime-local" class="w-full" />
+
+                        <UFormField label="Descripción corta" name="description">
+                            <UInput v-model="state.description" class="w-full" />
                         </UFormField>
-                    </div>
 
-                    <div v-if="daysOfSponsorship > 0" class="rounded-md bg-blue-50 p-3">
-                        <p class="text-sm text-blue-700">
-                            <strong>Duración del auspicio:</strong> {{ daysOfSponsorship }} día{{ daysOfSponsorship !== 1 ? 's' : '' }}
-                        </p>
-                    </div>
+                        <UFormField label="Email" name="email">
+                            <UInput v-model="state.email" type="email" class="w-full" />
+                        </UFormField>
 
-                    <div class="mt-6 flex justify-end gap-2">
-                        <UButton type="button" color="neutral" variant="outline" @click="emit('update:open', false)">Cancelar</UButton>
-                        <UButton type="submit" color="primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</UButton>
-                    </div>
-                </UForm>
+                        <div class="flex flex-col gap-4 md:flex-row">
+                            <UFormField label="Número de contacto" name="phone" class="flex-1">
+                                <UInput v-model="state.phone" class="w-full" />
+                            </UFormField>
+                            <UFormField label="Link del anuncio o imagen" name="media_url" class="flex-1">
+                                <UInput v-model="state.media_url" class="w-full" />
+                            </UFormField>
+                        </div>
+                        <UFormField label="Sitio web" name="website_url">
+                            <UInput v-model="state.website_url" class="w-full" />
+                        </UFormField>
+
+                        <div class="flex flex-col gap-4 md:flex-row">
+                            <UFormField label="Inicio del auspicio" name="promotion_start" class="flex-1">
+                                <UInput v-model="state.promotion_start" type="datetime-local" class="w-full" />
+                            </UFormField>
+                            <UFormField label="Fin del auspicio" name="promotion_end" class="flex-1">
+                                <UInput v-model="state.promotion_end" type="datetime-local" class="w-full" />
+                            </UFormField>
+                        </div>
+
+                        <div v-if="daysOfSponsorship > 0" class="rounded-md bg-blue-50 p-3">
+                            <p class="text-sm text-blue-700">
+                                <strong>Duración del auspicio:</strong> {{ daysOfSponsorship }} día{{ daysOfSponsorship !== 1 ? 's' : '' }}
+                            </p>
+                        </div>
+
+                        <div class="mt-6 flex justify-end gap-2">
+                            <UButton type="button" color="neutral" variant="outline" @click="emit('update:open', false)">Cancelar</UButton>
+                            <UButton type="submit" color="primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</UButton>
+                        </div>
+                    </UForm>
+                </div>
             </div>
         </template>
     </UModal>
