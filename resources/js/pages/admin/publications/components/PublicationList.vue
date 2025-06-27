@@ -7,6 +7,7 @@ interface Props {
     publications: Publication[];
 }
 
+
 const props = defineProps<Props>();
 const emit = defineEmits(['edit']);
 
