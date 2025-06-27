@@ -117,7 +117,7 @@
 
 :root {
     /* Color de fondo en el modo claro (beige cálido) */
-    --background: hsl(40, 100%, 98%);
+    --background: hsl(42, 100%, 99%);
     /* Color de primer plano en el modo claro (marrón oscuro) */
     --foreground: hsl(30, 40%, 20%);
     /* Color de fondo para las tarjetas en el modo claro (blanco cálido) */

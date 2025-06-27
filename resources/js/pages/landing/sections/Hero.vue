@@ -1,6 +1,9 @@
 <script setup lang="ts">
 // Header hero puro, sin tarjeta
 
+import { onMounted, onUnmounted, ref } from 'vue';
+import GalleryVerticalCarousel from '../components/GalleryVerticalCarousel.vue';
+
 interface Props {
     socialMediaUrls?: Record<string, string>;
 }
@@ -13,19 +16,47 @@ const scrollToVideo = () => {
         el.scrollIntoView({ behavior: 'smooth' });
     }
 };
+
+// Carrusel vertical automático de fotos
+const galleryImages = [
+    '/assets/images/gallery/1.jpg',
+    '/assets/images/gallery/2.jpg',
+    '/assets/images/gallery/3.jpg',
+    '/assets/images/gallery/4.jpg',
+    '/assets/images/gallery/5.jpg',
+    '/assets/images/gallery/6.jpg',
+    '/assets/images/gallery/7.jpg',
+    '/assets/images/gallery/8.jpg',
+    '/assets/images/gallery/9.jpg',
+    '/assets/images/gallery/10.jpg',
+    '/assets/images/gallery/11.jpg',
+    '/assets/images/gallery/12.jpg',
+    '/assets/images/gallery/14.jpg',
+    '/assets/images/gallery/15.jpg',
+    '/assets/images/gallery/16.jpg',
+];
+const currentIndex = ref(0);
+let intervalId: any = null;
+
+onMounted(() => {
+    intervalId = setInterval(() => {
+        currentIndex.value = (currentIndex.value + 1) % galleryImages.length;
+    }, 2500);
+});
+onUnmounted(() => {
+    if (intervalId) clearInterval(intervalId);
+});
 </script>
 
 <template>
-    <section
-        class="relative flex min-h-screen w-full items-center justify-center bg-gradient-to-b from-purple-100 to-background dark:from-purple-900 dark:to-background"
-    >
+    <section class="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-background">
         <UContainer class="flex w-full flex-col gap-16 md:flex-row">
             <!-- Columna izquierda -->
             <div class="flex flex-1 flex-col justify-center gap-6">
                 <div>
-                    <h1 class="text-5xl leading-tight font-black text-primary">Reencuentro</h1>
-                    <p class="mt-2 text-3xl font-semibold text-foreground/90">Con Pilar Trujillo Martel</p>
-                    <p class="mt-4 max-w-xl text-xl text-foreground/80">
+                    <img src="/assets/images/brand/imagotipo_name_left.png" alt="Reencuentro" class="w-92" />
+
+                    <p class="mt-10 max-w-xl pr-36 text-xl text-foreground/80">
                         Un espacio para el diálogo y análisis de la realidad de Huánuco y el Perú. Bajo la dirección de la periodista Pilar Trujillo
                         Martel, "Reencuentro" busca tender puentes y dar voz a nuestra gente.
                     </p>
@@ -73,13 +104,25 @@ const scrollToVideo = () => {
                     <UButton color="primary" size="lg" variant="outline" class="px-8" to="#">Conocer más</UButton>
                 </div>
             </div>
+            <!-- Columna derecha: Carrusel vertical -->
+            <GalleryVerticalCarousel class="hidden h-full max-h-full flex-1 md:flex" />
         </UContainer>
-        <!-- Imagen PNG de la persona, centrada abajo -->
-        <img
-            src="/assets/woman.png"
-            alt="Pilar Trujillo Martel"
-            class="pointer-events-none absolute bottom-0 left-1/2 z-20 h-auto w-auto max-w-xs translate-x-20 select-none md:max-w-md lg:max-w-lg"
-            draggable="false"
-        />
     </section>
 </template>
+
+<style scoped>
+.slide-vertical-enter-active,
+.slide-vertical-leave-active {
+    transition:
+        opacity 0.7s,
+        transform 0.7s;
+}
+.slide-vertical-enter-from {
+    opacity: 0;
+    transform: translateY(40px);
+}
+.slide-vertical-leave-to {
+    opacity: 0;
+    transform: translateY(-40px);
+}
+</style>

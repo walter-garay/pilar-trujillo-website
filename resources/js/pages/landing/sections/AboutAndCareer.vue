@@ -1,74 +1,177 @@
 <script setup lang="ts">
-// Sección Sobre mí y Reencuentro con NuxtUI y placeholders
+import { ref } from 'vue';
+
+const expanded = ref(false);
+const expanded2 = ref(false);
 </script>
 
 <template>
-    <section
-        class="relative flex min-h-screen w-full items-center justify-center bg-gradient-to-b from-background to-purple-50 py-16 dark:to-purple-950"
-    >
-        <UContainer class="flex w-full flex-col gap-12 md:flex-row">
-            <!-- Columna 1: Sobre mí -->
-            <UCard class="flex flex-1 flex-col items-center justify-center gap-6 bg-background/80 shadow-xl md:items-start">
-                <div class="mb-2 flex items-center gap-4">
-                    <UAvatar src="https://randomuser.me/api/portraits/women/44.jpg" size="xl" alt="Pilar Trujillo" />
-                    <div>
-                        <h2 class="text-3xl font-bold text-primary">Pilar Trujillo</h2>
-                        <UBadge color="primary" variant="soft">Periodista</UBadge>
+    <section class="relative flex min-h-screen w-full items-center justify-center bg-background py-16">
+        <UContainer class="flex w-full flex-col gap-12">
+            <!-- Fila 1: Biografía de Pilar Trujillo -->
+            <UCard class="flex w-full flex-col items-center justify-center gap-6 bg-muted p-8 shadow-xl">
+                <!-- Galería de fotos de Pilar -->
+                <div class="mb-4 flex w-full flex-row flex-wrap justify-center gap-4">
+                    <img src="/assets/images/pilar/1.jpg" alt="Pilar 1" class="h-32 w-32 rounded-xl object-cover shadow" />
+                    <img src="/assets/images/pilar/2.jpg" alt="Pilar 2" class="h-32 w-32 rounded-xl object-cover shadow" />
+                    <img src="/assets/images/pilar/3.JPG" alt="Pilar 3" class="h-32 w-32 rounded-xl object-cover shadow" />
+                    <img src="/assets/images/pilar/4.jpg" alt="Pilar 4" class="h-32 w-32 rounded-xl object-cover shadow" />
+                </div>
+                <h2 class="text-center text-2xl font-extrabold text-primary md:text-3xl">Hortensia del Pilar Trujillo Martel</h2>
+                <p class="mb-2 text-center text-base font-semibold text-primary/80 md:text-lg">Comunicadora cultural por naturaleza</p>
+                <div
+                    class="relative mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 text-justify text-sm leading-relaxed text-foreground/90 md:grid-cols-2 md:text-base"
+                    :class="expanded ? '' : 'max-h-64 overflow-hidden'"
+                >
+                    <div
+                        v-if="!expanded"
+                        class="pointer-events-none absolute bottom-0 left-0 h-16 w-full bg-gradient-to-t from-background/90 to-transparent"
+                    ></div>
+                    <div class="space-y-4">
+                        <p>
+                            Hortensia del Pilar Trujillo Martel, nació en la cálida ciudad de Huánuco el 29 de marzo de 1966. El amor por Huánuco, la
+                            cultura y la radiodifusión, marcan la pauta en su vida. El primer atisbo sería el periódico mural a su cargo en el Colegio
+                            María Auxiliadora de nuestra ciudad.
+                        </p>
+                        <p>
+                            En 1985, casi al culminar la carrera de Guía Oficial de Turismo en el Instituto Superior Tecnológico Aparicio Pomares,
+                            asumió como vital la tarea de fomentar la trascendencia cultural y socioeconómica del turismo, por ello se capacitó en
+                            producción de programas de televisión en el Instituto Nacional de Investigación y Capacitación en Telecomunicaciones
+                            INICTEL de Lima.
+                        </p>
+                        <p>
+                            Definió también, como baluarte de su trabajo comunicacional, la investigación, al iniciar los estudios sobre las Lagunas
+                            de Pichgacocha para su difusión. Y, entre los años 1989-1990 sería responsable del segmento cultural en el noticiero de
+                            radio Studio 5. Esta vertiente, se acrisolaría laborando en el área de publicidad del suplemento El Dominical de El
+                            Comercio, entre los años 1993-1997, al crear productos periodísticos semanalmente, y escribir algunos artículos sobre
+                            Huánuco.
+                        </p>
+                        <p>
+                            Destacado rol asume en esta dimensión, su participación durante los años 1998-2000 en cuatro guías turísticas de la serie
+                            Todo: Todo Arequipa, Todo Lima, Todo Perú y Todo Machu Picchu, producidas por Editorial Escudo de Oro (España) y Tierra
+                            Firme Ediciones (Perú).
+                        </p>
+                        <p>
+                            Dos documentales referidos a la Congregación de las Hijas de María Auxiliadora (2007-2008), se registran en este contexto,
+                            al igual que la historia de la sagrada imagen del Señor de Burgos de Huánuco (2015).
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <p>
+                            Asumió su desempeño profesional en Ciencias de la Comunicación Social en la esfera cultural. Su propuesta concreta es
+                            REENCUENTRO, que significa volver a encontrarse con el pasado, con las raíces. El objetivo es fortalecer el amor por lo
+                            nuestro.
+                        </p>
+                        <p>
+                            Reingresaría al fascinante mundo de la radio en el año 2005, primero con ediciones especiales en Studio 5, formalmente
+                            desde el 2007 hasta el 2012. Luego en Ondas del Huallaga, posteriormente en radio La Cabaña y, finalmente, en radio
+                            UNEHVAL.
+                        </p>
+                        <p>
+                            Su misión se extendería en la prensa escrita a través de los diarios El Espectador, Antorcha, Ahora, Página3 y en la
+                            Revista Papiro. Su impensada inserción en la televisión con REENCUENTRO en su condición de directora y conductora, tendría
+                            lugar hace 13 años en Cable Visión Huánuco Canal 21, hoy en CTV Continental Televisión Canal 25 UHF ubicándose como uno de
+                            los de mayor sintonía dentro de su programación.
+                        </p>
+                        <p>
+                            Esta realidad profesional –creativa, ética y comprometida– ha contribuido a fomentar y fortalecer la valoración por
+                            nuestro patrimonio material e inmaterial regional. Por otra parte, ha motivado el asumir la cultura como un camino hacia
+                            la realización profesional en un segmento de jóvenes generaciones de comunicadores sociales.
+                        </p>
+                        <p>
+                            Su transitar por las aulas del nivel secundaria en el colegio de las Dominicas de Huánuco y, luego, en las universitarias
+                            de Alas Peruanas y en la Universidad de Huánuco –en las cátedras de comunicación y marketing–, tuvo como sello distintivo
+                            su profesionalismo y el fomento del amor a Huánuco en sus jóvenes alumnos.
+                        </p>
                     </div>
                 </div>
-                <div class="mb-2 flex flex-wrap gap-2">
-                    <UAvatar src="https://randomuser.me/api/portraits/women/45.jpg" size="md" alt="Pilar joven" />
-                    <UAvatar src="https://randomuser.me/api/portraits/women/46.jpg" size="md" alt="Pilar reportera" />
-                    <UAvatar src="https://randomuser.me/api/portraits/women/47.jpg" size="md" alt="Pilar en evento" />
-                </div>
-                <p class="max-w-xl text-lg text-foreground/80">
-                    Soy una periodista huanuqueña apasionada por contar historias que inspiran y transforman. Con más de 20 años de experiencia, he
-                    recibido múltiples premios de periodismo y soy reconocida por mi compromiso con la verdad y la reconciliación social.
-                </p>
-                <div class="mt-2 flex gap-4">
-                    <UBadge color="primary" variant="outline">15+ Premios</UBadge>
-                    <UBadge color="primary" variant="outline">500+ Entrevistas</UBadge>
-                    <UBadge color="primary" variant="outline">20 años</UBadge>
+                <div class="flex w-full justify-center">
+                    <UButton color="primary" variant="soft" class="mt-2" @click="expanded = !expanded">
+                        {{ expanded ? 'Ver menos' : 'Ver más' }}
+                    </UButton>
                 </div>
             </UCard>
-            <!-- Columna 2: Reencuentro -->
-            <UCard class="flex flex-1 flex-col items-center justify-center gap-6 bg-background/80 shadow-xl md:items-start">
-                <div class="mb-2 flex items-center gap-4">
-                    <UAvatar
-                        src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=facearea&w=128&q=80"
-                        size="xl"
-                        alt="Reencuentro"
-                    />
-                    <div>
-                        <h2 class="text-3xl font-bold text-primary">Reencuentro</h2>
-                        <UBadge color="primary" variant="soft">Programa Estelar</UBadge>
+            <!-- Fila 2: Reencuentro -->
+            <UCard class="flex w-full flex-col items-center justify-center gap-6 bg-muted p-8 shadow-xl">
+                <!-- Galería de fotos de Reencuentro -->
+                <div class="mb-4 flex w-full flex-row flex-wrap justify-center gap-4">
+                    <img src="/assets/images/gallery/1.jpg" alt="Reencuentro 1" class="h-32 w-32 rounded-xl object-cover shadow" />
+                    <img src="/assets/images/gallery/2.jpg" alt="Reencuentro 2" class="h-32 w-32 rounded-xl object-cover shadow" />
+                    <img src="/assets/images/gallery/3.jpg" alt="Reencuentro 3" class="h-32 w-32 rounded-xl object-cover shadow" />
+                    <img src="/assets/images/gallery/4.jpg" alt="Reencuentro 4" class="h-32 w-32 rounded-xl object-cover shadow" />
+                </div>
+                <h2 class="text-center text-2xl font-extrabold text-primary md:text-3xl">Reencuentro</h2>
+                <p class="mb-2 text-center text-base font-semibold text-primary/80 md:text-lg">Programa estelar de cultura y reconciliación</p>
+                <div
+                    class="relative mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 text-justify text-sm leading-relaxed text-foreground/90 md:grid-cols-2 md:text-base"
+                    :class="expanded2 ? '' : 'max-h-64 overflow-hidden'"
+                >
+                    <div
+                        v-if="!expanded2"
+                        class="pointer-events-none absolute bottom-0 left-0 h-16 w-full bg-gradient-to-t from-background/90 to-transparent"
+                    ></div>
+                    <div class="space-y-4">
+                        <p>
+                            Hortensia del Pilar Trujillo Martel, nació en la cálida ciudad de Huánuco el 29 de marzo de 1966. El amor por Huánuco, la
+                            cultura y la radiodifusión, marcan la pauta en su vida. El primer atisbo sería el periódico mural a su cargo en el Colegio
+                            María Auxiliadora de nuestra ciudad.
+                        </p>
+                        <p>
+                            En 1985, casi al culminar la carrera de Guía Oficial de Turismo en el Instituto Superior Tecnológico Aparicio Pomares,
+                            asumió como vital la tarea de fomentar la trascendencia cultural y socioeconómica del turismo, por ello se capacitó en
+                            producción de programas de televisión en el Instituto Nacional de Investigación y Capacitación en Telecomunicaciones
+                            INICTEL de Lima.
+                        </p>
+                        <p>
+                            Definió también, como baluarte de su trabajo comunicacional, la investigación, al iniciar los estudios sobre las Lagunas
+                            de Pichgacocha para su difusión. Y, entre los años 1989-1990 sería responsable del segmento cultural en el noticiero de
+                            radio Studio 5. Esta vertiente, se acrisolaría laborando en el área de publicidad del suplemento El Dominical de El
+                            Comercio, entre los años 1993-1997, al crear productos periodísticos semanalmente, y escribir algunos artículos sobre
+                            Huánuco.
+                        </p>
+                        <p>
+                            Destacado rol asume en esta dimensión, su participación durante los años 1998-2000 en cuatro guías turísticas de la serie
+                            Todo: Todo Arequipa, Todo Lima, Todo Perú y Todo Machu Picchu, producidas por Editorial Escudo de Oro (España) y Tierra
+                            Firme Ediciones (Perú).
+                        </p>
+                        <p>
+                            Dos documentales referidos a la Congregación de las Hijas de María Auxiliadora (2007-2008), se registran en este contexto,
+                            al igual que la historia de la sagrada imagen del Señor de Burgos de Huánuco (2015).
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <p>
+                            Asumió su desempeño profesional en Ciencias de la Comunicación Social en la esfera cultural. Su propuesta concreta es
+                            REENCUENTRO, que significa volver a encontrarse con el pasado, con las raíces. El objetivo es fortalecer el amor por lo
+                            nuestro.
+                        </p>
+                        <p>
+                            Reingresaría al fascinante mundo de la radio en el año 2005, primero con ediciones especiales en Studio 5, formalmente
+                            desde el 2007 hasta el 2012. Luego en Ondas del Huallaga, posteriormente en radio La Cabaña y, finalmente, en radio
+                            UNEHVAL.
+                        </p>
+                        <p>
+                            Su misión se extendería en la prensa escrita a través de los diarios El Espectador, Antorcha, Ahora, Página3 y en la
+                            Revista Papiro. Su impensada inserción en la televisión con REENCUENTRO en su condición de directora y conductora, tendría
+                            lugar hace 13 años en Cable Visión Huánuco Canal 21, hoy en CTV Continental Televisión Canal 25 UHF ubicándose como uno de
+                            los de mayor sintonía dentro de su programación.
+                        </p>
+                        <p>
+                            Esta realidad profesional –creativa, ética y comprometida– ha contribuido a fomentar y fortalecer la valoración por
+                            nuestro patrimonio material e inmaterial regional. Por otra parte, ha motivado el asumir la cultura como un camino hacia
+                            la realización profesional en un segmento de jóvenes generaciones de comunicadores sociales.
+                        </p>
+                        <p>
+                            Su transitar por las aulas del nivel secundaria en el colegio de las Dominicas de Huánuco y, luego, en las universitarias
+                            de Alas Peruanas y en la Universidad de Huánuco –en las cátedras de comunicación y marketing–, tuvo como sello distintivo
+                            su profesionalismo y el fomento del amor a Huánuco en sus jóvenes alumnos.
+                        </p>
                     </div>
                 </div>
-                <div class="mb-2 flex flex-wrap gap-2">
-                    <UAvatar
-                        src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=facearea&w=128&q=80"
-                        size="md"
-                        alt="Set TV"
-                    />
-                    <UAvatar
-                        src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=facearea&w=128&q=80"
-                        size="md"
-                        alt="Entrevista"
-                    />
-                    <UAvatar
-                        src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=128&q=80"
-                        size="md"
-                        alt="Producción"
-                    />
-                </div>
-                <p class="max-w-xl text-lg text-foreground/80">
-                    "Reencuentro" es mi programa estelar, donde exploro historias humanas de reconciliación, perdón y segundas oportunidades. Además,
-                    he trabajado en otros proyectos audiovisuales y documentales sobre temas sociales y culturales.
-                </p>
-                <div class="mt-2 flex gap-4">
-                    <UBadge color="primary" variant="outline">3 Temporadas</UBadge>
-                    <UBadge color="primary" variant="outline">+10 Proyectos</UBadge>
-                    <UBadge color="primary" variant="outline">Premio Social 2023</UBadge>
+                <div class="flex w-full justify-center">
+                    <UButton color="primary" variant="soft" class="mt-2" @click="expanded2 = !expanded2">
+                        {{ expanded2 ? 'Ver menos' : 'Ver más' }}
+                    </UButton>
                 </div>
             </UCard>
         </UContainer>
