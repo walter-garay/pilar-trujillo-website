@@ -8,12 +8,13 @@ interface Props {
 const { email, phone, socialMediaUrls } = defineProps<Props>();
 
 const quickLinks = [
-    { text: 'Sobre Mí', href: '#' },
-    { text: 'Reencuentro', href: '#' },
+    { text: 'Sobre Mí', href: '/#sobremi' },
+    { text: 'Reencuentro', href: '/' },
+    { text: 'Galería', href: '/galeria' },
     { text: 'Multimedia', href: '/multimedia' },
-    { text: 'Sponsors', href: '#' },
-    { text: 'Publicaciones', href: '/publicacions' },
-    { text: 'Colaboraciones', href: '#' },
+    { text: 'Sponsors', href: '/#sponsors' },
+    { text: 'Publicaciones', href: '/publicaciones' },
+    { text: 'Colaboraciones', href: '/#colaboraciones' },
 ];
 
 // Generar enlaces de WhatsApp dinámicamente
@@ -40,12 +41,11 @@ const donationLink = getWhatsAppLink(
                 <!-- About Section -->
                 <div class="lg:col-span-1">
                     <div class="flex items-center gap-3">
-                        <UAvatar size="md" src="/assets/woman.png" alt="Pilar Trujillo" />
-                        <span class="text-xl font-bold text-foreground">Pilar Trujillo</span>
+                        <UAvatar size="md" src="/assets/images/pilar/perfil.jpg" alt="Pilar Trujillo" />
+                        <span class="text-xl font-bold text-foreground">Pilar Trujillo Martel</span>
                     </div>
                     <p class="mt-4 text-sm text-muted-foreground">
-                        Periodista comprometida con la verdad, la justicia social y la construcción de puentes entre las personas a través de
-                        historias que transforman.
+                        Comunicadora cultural por naturaleza.
                     </p>
                     <div class="mt-6 flex gap-3">
                         <UButton
@@ -83,6 +83,16 @@ const donationLink = getWhatsAppLink(
                             :to="socialMediaUrls.youtube"
                             target="_blank"
                             icon="i-lucide-youtube"
+                            color="neutral"
+                            variant="ghost"
+                            size="lg"
+                            class="rounded-full text-muted-foreground hover:text-foreground"
+                        />
+                        <UButton
+                            v-if="socialMediaUrls?.twitter"
+                            :to="socialMediaUrls.twitter"
+                            target="_blank"
+                            icon="i-cib-twitter"
                             color="neutral"
                             variant="ghost"
                             size="lg"

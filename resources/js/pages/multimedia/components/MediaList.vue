@@ -47,7 +47,6 @@ const totalPages = computed(() => {
     return Math.ceil(props.medias.length / PAGE_SIZE) || 1;
 });
 
-
 const handleMediaSelect = (media: Media) => {
     emit('selectMedia', media);
 };
@@ -117,12 +116,7 @@ const formatTypeName = (type: string) => {
             </UCard>
         </div>
         <div v-if="totalPages > 1" class="mt-8 flex justify-center">
-            <UPagination
-                v-model:page="currentPage"
-                :total="medias.length"
-                :items-per-page="PAGE_SIZE"
-                :show-controls="true"
-            />
+            <UPagination v-model:page="currentPage" :total="medias.length" :items-per-page="PAGE_SIZE" :show-controls="true" />
         </div>
     </div>
 </template>

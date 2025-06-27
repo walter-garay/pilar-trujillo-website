@@ -3,14 +3,13 @@ import Navbar from '@/pages/landing/components/Navbar.vue';
 import Footer from '@/pages/landing/sections/Footer.vue';
 import type { Publication } from '@/types';
 import { Head, router } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 interface Props {
     publication: Publication;
 }
 
 const props = defineProps<Props>();
-
 const images = computed(() => props.publication.images || []);
 const author = computed(() => props.publication.author);
 const category = computed(() => props.publication.category);
@@ -39,6 +38,19 @@ const formatDate = (dateString: string) => {
 const goBack = () => {
     router.visit('/publicaciones');
 };
+
+// Carrusel manual
+const currentIndex = ref(0);
+const goPrev = () => {
+    if (images.value.length) {
+        currentIndex.value = (currentIndex.value - 1 + images.value.length) % images.value.length;
+    }
+};
+const goNext = () => {
+    if (images.value.length) {
+        currentIndex.value = (currentIndex.value + 1) % images.value.length;
+    }
+};
 </script>
 
 <template>
@@ -50,12 +62,23 @@ const goBack = () => {
             <div class="mb-6">
                 <UButton color="primary" variant="soft" icon="i-lucide-arrow-left" @click="goBack"> Volver a publicaciones </UButton>
             </div>
-            <!-- Carrusel de imágenes -->
-            <div v-if="images.length" class="mb-6">
-                <UCarousel v-slot="{ item }" :items="images" class="overflow-hidden rounded-lg" :ui="{ container: 'h-[340px]' }">
-                    <img :src="item.file_url" :alt="item.caption || 'Imagen de la publicación'" class="h-[340px] w-full object-cover" />
-                    <div v-if="item.caption" class="absolute bottom-0 left-0 w-full bg-black/60 px-3 py-1 text-xs text-white">{{ item.caption }}</div>
-                </UCarousel>
+            <!-- Título de la publicación -->
+            <h1 class="mb-4 text-center text-3xl font-bold text-card-foreground">{{ props.publication.title }}</h1>
+            <!-- Carrusel de imágenes con botones laterales -->
+            <div v-if="images.length" class="relative mb-6 flex items-center justify-center">
+                <button v-if="images.length > 1" class="carousel-btn left" @click="goPrev" aria-label="Anterior">
+                    <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
+                        <path d="M15 19l-7-7 7-7" stroke="#fcc633" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="carousel-img-wrapper">
+                    <img :src="images[currentIndex].file_url" alt="Imagen de la publicación" class="carousel-img" />
+                </div>
+                <button v-if="images.length > 1" class="carousel-btn right" @click="goNext" aria-label="Siguiente">
+                    <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7" stroke="#fcc633" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
 
             <!-- Fecha y vistas -->
@@ -116,3 +139,52 @@ const goBack = () => {
         <Footer />
     </div>
 </template>
+
+<style scoped>
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s;
+}
+.carousel-btn.left {
+    left: -24px;
+}
+.carousel-btn.right {
+    right: -24px;
+}
+.carousel-btn:hover {
+    background: rgba(252, 198, 51, 0.8);
+}
+.carousel-img-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 320px;
+    max-height: 420px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+}
+.carousel-img {
+    max-width: 100%;
+    max-height: 420px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+</style>

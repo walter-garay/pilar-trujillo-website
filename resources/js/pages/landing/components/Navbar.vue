@@ -6,6 +6,9 @@
                 <UButton variant="ghost" class="font-bold text-black underline-offset-4 hover:underline" color="primary" to="/publicaciones"
                     >Publicaciones</UButton
                 >
+                <UButton variant="ghost" class="font-bold text-black underline-offset-4 hover:underline" color="primary" to="/galeria"
+                    >Galería</UButton
+                >
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <UButton

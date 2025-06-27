@@ -22,9 +22,10 @@ class AdminUserSeeder extends Seeder
             'phone' => '+51 993 006 779',
             'social_media_urls' => [
                 'facebook' => 'https://www.facebook.com/pilar.trujillomartel',
-                'tiktok' => 'https://linkedin.com/in/pilartrujillo',
-                'instagram' => 'https://instagram.com/pilartrujillo',
-                'youtube' => 'https://www.youtube.com/@reencuentro-pilartrujillom7251'
+                'tiktok' => 'https://www.tiktok.com/@pilar.trujillo.ma',
+                'instagram' => 'https://www.instagram.com/reencuentro_cultural',
+                'youtube' => 'https://www.youtube.com/@reencuentro_cultural',
+                'twitter' => 'https://x.com/Reencuentro_Hoy',
             ],
             'photo_url' => '/assets/images/pilar/perfil.png',
             'email_verified_at' => now(),

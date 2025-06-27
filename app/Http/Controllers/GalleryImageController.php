@@ -12,7 +12,7 @@ class GalleryImageController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('gallery/GalleryCatalog');
     }
 
     /**

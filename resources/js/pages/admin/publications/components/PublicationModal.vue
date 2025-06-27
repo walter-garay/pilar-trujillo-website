@@ -148,7 +148,7 @@ const userItems = computed(() => props.users.map((u) => ({ label: u.name, value:
 </script>
 
 <template>
-    <UModal v-model:open="internalOpen" fullscreen :title="isEdit ? 'Editar publicación' : 'Agregar publicación'" :class="'z-[1200]'">
+    <UModal v-model:open="internalOpen" fullscreen :title="isEdit ? 'Editar publicación' : 'Agregar publicación'" :class="'z-[10]'">
         <template #body>
             <div class="mx-auto flex min-h-full w-full max-w-2xl items-center justify-center p-6">
                 <div class="w-full">
@@ -168,20 +168,17 @@ const userItems = computed(() => props.users.map((u) => ({ label: u.name, value:
                                     { label: 'Activo', value: 'active' },
                                     { label: 'Archivado', value: 'archived' },
                                 ]"
+                                :portal="false"
                                 class="w-full"
                             />
                         </UFormField>
 
                         <UFormField label="Categoría" name="category_id">
-                            <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" />
-                        </UFormField>
-
-                        <UFormField label="Autor" name="author_id">
-                            <USelect v-model="state.author_id" :items="userItems" class="w-full" />
+                            <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" :portal="false" />
                         </UFormField>
 
                         <UFormField label="Etiquetas (tags)" name="tags">
-                            <UInputTags v-model="state.tags" class="w-full" />
+                            <UInputTags v-model="state.tags" class="w-full" :class="'z-[8]'" />
                         </UFormField>
 
                         <div class="space-y-4">

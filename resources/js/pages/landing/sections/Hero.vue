@@ -57,7 +57,8 @@ onUnmounted(() => {
                     <img src="/assets/images/brand/imagotipo_name_left.png" alt="Reencuentro" class="w-92" />
 
                     <p class="mt-10 max-w-xl pr-36 text-xl text-foreground/80">
-                        Un medio que se expresa a través de quienes fueron protagonistas de su historia, para nutrir al hombre de hoy, ante los grandes retos como el de construir un futuro memorioso, innovador, esencialmente humanista.
+                        Un medio que se expresa a través de quienes fueron protagonistas de su historia, para nutrir al hombre de hoy, ante los
+                        grandes retos como el de construir un futuro memorioso, innovador, esencialmente humanista.
                     </p>
                 </div>
                 <div class="mt-2 flex gap-6">
@@ -96,6 +97,15 @@ onUnmounted(() => {
                         class="text-foreground/80 transition-colors hover:text-primary"
                     >
                         <UIcon name="i-cib-youtube" class="h-6 w-6" />
+                    </ULink>
+                    <ULink
+                        v-if="socialMediaUrls?.twitter"
+                        :to="socialMediaUrls.twitter"
+                        target="_blank"
+                        aria-label="Twitter"
+                        class="text-foreground/80 transition-colors hover:text-primary"
+                    >
+                        <UIcon name="i-cib-twitter" class="h-6 w-6" />
                     </ULink>
                 </div>
                 <div class="mt-6 flex gap-4">

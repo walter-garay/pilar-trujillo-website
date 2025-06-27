@@ -165,7 +165,7 @@ const onSubmit = () => {
                             <UInput v-model="state.publication_date" type="datetime-local" class="w-full" />
                         </UFormField>
                         <UFormField label="Categoría" name="category_id">
-                            <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" />
+                            <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" :portal="false" />
                         </UFormField>
                         <UFormField label="Etiquetas (tags)" name="tags">
                             <UInputTags v-model="state.tags" class="w-full" />

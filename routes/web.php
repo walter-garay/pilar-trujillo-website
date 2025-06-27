@@ -4,6 +4,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\GalleryImageController;
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/admin/multimedia/{media}', [MediaController::class, 'update'])->name('admin.medias.update');
     Route::delete('/admin/multimedia/{media}', [MediaController::class, 'destroy'])->name('admin.medias.destroy');
 });
+
+Route::get('/galeria', [GalleryImageController::class, 'index'])->name('gallery.index');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

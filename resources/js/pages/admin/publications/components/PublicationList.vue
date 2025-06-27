@@ -64,6 +64,9 @@ const cancelDelete = () => {
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <UCard v-for="pub in props.publications" :key="pub.id" class="flex flex-col">
                 <div class="flex flex-1 flex-col gap-2">
+                    <div v-if="pub.images && pub.images.length" class="mb-2">
+                        <img :src="pub.images[0].file_url" :alt="pub.title" class="h-40 w-full rounded object-cover" />
+                    </div>
                     <h2 class="line-clamp-2 text-lg font-bold">{{ pub.title }}</h2>
                     <div class="flex items-center gap-2 text-xs text-muted-foreground">
                         <span v-if="pub.author">👤 {{ pub.author.name }}</span>
