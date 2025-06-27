@@ -39,7 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/admin/publicaciones/{publication}', [PublicationController::class, 'destroy'])->name('admin.publications.destroy');
 
     // Medias admin
-    Route::get('/admin/multimedia', [MediaController::class, 'adminIndex'])->name('admin.medias');
+    Route::get('/admin/multimedia', [MediaController::class, 'adminIndex']);
+    Route::get('/admin/multimedia/{type}', [MediaController::class, 'adminIndex'])->name('admin.medias');
     Route::post('/admin/multimedia', [MediaController::class, 'store'])->name('admin.medias.store');
     Route::put('/admin/multimedia/{media}', [MediaController::class, 'update'])->name('admin.medias.update');
     Route::delete('/admin/multimedia/{media}', [MediaController::class, 'destroy'])->name('admin.medias.destroy');

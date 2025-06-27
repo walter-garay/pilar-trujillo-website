@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -60,9 +63,12 @@ class MediaController extends Controller
             'category_id' => 'required|exists:categories,id',
             'file_url' => 'nullable|string',
             'publication_date' => 'nullable|date',
+            'cover_image_url' => 'nullable|string',
+            'tags' => 'nullable',
         ]);
-        Media::create($validated);
-        return redirect()->route('admin.medias')->with('success', 'Media creada exitosamente.');
+        $validated['user_id'] = Auth::id() ?? 1;
+        $media = Media::create($validated);
+        return redirect()->route('admin.medias', ['type' => $media->type])->with('success', 'Media creada exitosamente.');
     }
 
     /**
@@ -85,9 +91,12 @@ class MediaController extends Controller
             'category_id' => 'required|exists:categories,id',
             'file_url' => 'nullable|string',
             'publication_date' => 'nullable|date',
+            'cover_image_url' => 'nullable|string',
+            'tags' => 'nullable',
         ]);
+        $validated['user_id'] = Auth::id() ?? 1;
         $media->update($validated);
-        return redirect()->route('admin.medias')->with('success', 'Media actualizada exitosamente.');
+        return redirect()->route('admin.medias', ['type' => $media->type])->with('success', 'Media actualizada exitosamente.');
     }
 
     /**
@@ -96,7 +105,7 @@ class MediaController extends Controller
     public function destroy(Media $media)
     {
         $media->delete();
-        return redirect()->route('admin.medias')->with('success', 'Media eliminada exitosamente.');
+        return redirect()->route('admin.medias', ['type' => $media->type])->with('success', 'Media eliminada exitosamente.');
     }
 
     /**
@@ -129,13 +138,33 @@ class MediaController extends Controller
     }
 
     /**
-     * Mostrar el listado de medias para el admin.
+     * Mostrar el listado de medias para el admin filtradas por tipo.
      */
-    public function adminIndex()
+    public function adminIndex($type = 'television')
     {
-        $medias = Media::with('category')->latest('publication_date')->get();
-        return Inertia::render('admin/multimedia/Management', [
+        // Traducción de tipos en español a los valores de la base de datos
+        $typeMap = [
+            'television' => 'television',
+            'radio' => 'radio',
+            'audiolibros' => 'audiobook',
+            'exclusivos' => 'exclusive',
+            'cortos' => 'short_video',
+            'podcast' => 'podcast',
+        ];
+
+        $dbType = $typeMap[$type] ?? $type;
+
+        $medias = Media::with('category')
+            ->where('type', $dbType)
+            ->latest('created_at')
+            ->get();
+            
+        $categories = Category::where('type', 'media')->get();
+
+        return Inertia::render('admin/multimedia/MediaManagement', [
             'medias' => $medias,
+            'selectedType' => $type,
+            'categories' => $categories,
         ]);
     }
 }

@@ -89,7 +89,6 @@
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
-
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -117,137 +116,136 @@
 }
 
 :root {
-    /* Color de fondo en el modo claro (blanco) */
-    --background: hsl(0, 0%, 100%);
-    /* Color de primer plano en el modo claro (texto oscuro) */
-    --foreground: hsl(0 0% 3.9%);
-    /* Color de fondo para las tarjetas en el modo claro (blanco) */
-    --card: hsl(200, 29%, 97%);
-    /* Color de texto dentro de las tarjetas en el modo claro (oscuro) */
-    --card-foreground: hsl(0 0% 3.9%);
-    /* Color de fondo para popovers (elementos emergentes) en el modo claro (blanco) */
-    --popover: hsl(0 0% 100%);
-    /* Color de texto dentro de los popovers en el modo claro (oscuro) */
-    --popover-foreground: hsl(0 0% 3.9%);
-    /* Color primario (botones principales, enlaces) */
-    --primary: hsl(287, 86%, 47%); /* por defecto hsl(0 0% 98%)*/
+    /* Color de fondo en el modo claro (beige cálido) */
+    --background: hsl(40, 100%, 98%);
+    /* Color de primer plano en el modo claro (marrón oscuro) */
+    --foreground: hsl(30, 40%, 20%);
+    /* Color de fondo para las tarjetas en el modo claro (blanco cálido) */
+    --card: hsl(44, 100%, 97%);
+    /* Color de texto dentro de las tarjetas en el modo claro (marrón oscuro) */
+    --card-foreground: hsl(30, 40%, 20%);
+    /* Color de fondo para popovers (elementos emergentes) en el modo claro (blanco cálido) */
+    --popover: hsl(44, 100%, 98%);
+    /* Color de texto dentro de los popovers en el modo claro (marrón oscuro) */
+    --popover-foreground: hsl(30, 40%, 20%);
+    /* Color primario (botones principales, enlaces) - amarillo marca */
+    --primary: #fcc633;
     /* Color de texto sobre el color primario */
-    --primary-foreground: hsl(0 0% 98%);
-    /* Color secundario (elementos adicionales) */
-    --secondary: hsl(0 0% 92.1%);
+    --primary-foreground: hsl(30, 40%, 20%);
+    /* Color secundario (naranja cálido) */
+    --secondary: hsl(32, 95%, 85%);
     /* Color de texto sobre el color secundario */
-    --secondary-foreground: hsl(0 0% 9%);
-    /* Color para elementos menos destacados o informativos */
-    --muted: hsl(0 0% 96.1%);
+    --secondary-foreground: hsl(30, 40%, 20%);
+    /* Color para elementos menos destacados o informativos (arena claro) */
+    --muted: hsl(40, 60%, 92%);
     /* Color de texto para elementos menos importantes */
-    --muted-foreground: hsl(0 0% 45.1%);
-    /* Color para elementos de acento (detalles pequeños) */
-    --accent: hsl(0 0% 96.1%);
+    --muted-foreground: hsl(30, 20%, 50%);
+    /* Color para elementos de acento (naranja intenso) */
+    --accent: hsl(32, 95%, 65%);
     /* Color de texto sobre los elementos de acento */
-    --accent-foreground: hsl(0 0% 9%);
-    /* Color para elementos destructivos (errores, alertas) */
-    --destructive: hsl(0 84.2% 60.2%);
+    --accent-foreground: hsl(30, 40%, 20%);
+    /* Color para elementos destructivos (rojo cálido) */
+    --destructive: hsl(10, 80%, 60%);
     /* Color de texto sobre los elementos destructivos */
-    --destructive-foreground: hsl(0 0% 98%);
-    /* Color del borde (bordes de tarjetas, inputs, etc.) */
-    --border: hsl(0 0% 92.8%);
-    /* Color de fondo para los inputs (campos de texto) */
-    --input: hsl(0 0% 89.8%);
-    /* Color del anillo de enfoque o focus (cuando el usuario interactúa) */
-    --ring: hsl(0 0% 3.9%);
-    /* Colores para los gráficos */
-    --chart-1: hsl(12 76% 61%);
-    --chart-2: hsl(173 58% 39%);
-    --chart-3: hsl(197 37% 24%);
-    --chart-4: hsl(43 74% 66%);
-    --chart-5: hsl(27 87% 67%);
+    --destructive-foreground: hsl(44, 100%, 98%);
+    /* Color del borde (arena suave) */
+    --border: hsl(40, 60%, 85%);
+    /* Color de fondo para los inputs (arena claro) */
+    --input: hsl(44, 100%, 96%);
+    /* Color del anillo de enfoque o focus (amarillo marca) */
+    --ring: #fcc633;
+    /* Colores para los gráficos (paleta cálida) */
+    --chart-1: #fcc633;
+    --chart-2: #f89c1c;
+    --chart-3: #e86a1c;
+    --chart-4: #d94f04;
+    --chart-5: #b53f0a;
     /* Radio (curvatura) de los bordes */
     --radius: 0.5rem;
-    /* Color de fondo de la barra lateral */
-    --sidebar-background: hsl(0 0% 98%);
-    /* Color de texto en la barra lateral */
-    --sidebar-foreground: hsl(240 5.3% 26.1%);
-    /* Color primario en la barra lateral */
-    --sidebar-primary: hsl(0 0% 10%);
+    /* Color de fondo de la barra lateral (beige cálido) */
+    --sidebar-background: hsl(44, 100%, 97%);
+    /* Color de texto en la barra lateral (marrón oscuro) */
+    --sidebar-foreground: hsl(30, 40%, 20%);
+    /* Color primario en la barra lateral (amarillo marca) */
+    --sidebar-primary: #fcc633;
     /* Color de texto para el primario en la barra lateral */
-    --sidebar-primary-foreground: hsl(0 0% 98%);
-    /* Color de acento en la barra lateral */
-    --sidebar-accent: hsl(0 0% 94%);
+    --sidebar-primary-foreground: hsl(30, 40%, 20%);
+    /* Color de acento en la barra lateral (naranja intenso) */
+    --sidebar-accent: hsl(32, 95%, 65%);
     /* Color de texto para el acento en la barra lateral */
-    --sidebar-accent-foreground: hsl(0 0% 30%);
-    /* Color del borde de la barra lateral */
-    --sidebar-border: hsl(0 0% 91%);
-    /* Color del anillo de enfoque en la barra lateral */
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
-    /* Color adicional para la barra lateral */
-    --sidebar: hsl(0 0% 98%);
+    --sidebar-accent-foreground: hsl(30, 40%, 20%);
+    /* Color del borde de la barra lateral (arena suave) */
+    --sidebar-border: hsl(40, 60%, 85%);
+    /* Color del anillo de enfoque en la barra lateral (amarillo marca) */
+    --sidebar-ring: #fcc633;
+    /* Color adicional para la barra lateral (beige cálido) */
+    --sidebar: hsl(44, 100%, 97%);
 }
 
 .dark {
-    /* Color de fondo en el modo oscuro (oscuro) */
-    --background: hsl(0, 0%, 0%);
-    /* Color de primer plano en el modo oscuro (texto claro) */
-    --foreground: hsl(0 0% 98%);
-    /* Color de fondo para las tarjetas en el modo oscuro (oscuro) */
-    --card: hsl(224, 30%, 18%);
-    /* Color de texto dentro de las tarjetas en el modo oscuro (claro) */
-    --card-foreground: hsl(0 0% 98%);
-    /* Color de fondo para popovers en el modo oscuro (oscuro) */
-    --popover: hsl(0 0% 3.9%);
-    /* Color de texto dentro de los popovers en el modo oscuro (claro) */
-    --popover-foreground: 0 0% 98%;
+    /* Color de fondo en el modo oscuro (marrón oscuro) */
+    --background: hsl(30, 40%, 10%);
+    /* Color de primer plano en el modo oscuro (amarillo marca) */
+    --foreground: #fcc633;
+    /* Color de fondo para las tarjetas en el modo oscuro (marrón profundo) */
+    --card: hsl(30, 40%, 15%);
+    /* Color de texto dentro de las tarjetas en el modo oscuro (amarillo marca) */
+    --card-foreground: #fcc633;
+    /* Color de fondo para popovers en el modo oscuro (marrón profundo) */
+    --popover: hsl(30, 40%, 13%);
+    /* Color de texto dentro de los popovers en el modo oscuro (amarillo marca) */
+    --popover-foreground: #fcc633;
     /* Color primario (en modo oscuro) */
-    --primary: hsl(287, 86%, 47%); /* por defecto hsl(0 0% 98%)*/
+    --primary: #fcc633;
     /* Color de texto sobre el color primario en el modo oscuro */
-    --primary-foreground: hsl(0, 0%, 100%);
-    /* Color secundario en el modo oscuro */
-    --secondary: hsl(0 0% 14.9%);
+    --primary-foreground: hsl(30, 40%, 15%);
+    /* Color secundario en el modo oscuro (naranja oscuro) */
+    --secondary: hsl(32, 95%, 35%);
     /* Color de texto sobre el color secundario en el modo oscuro */
-    --secondary-foreground: hsl(0 0% 98%);
-    /* Color para elementos menos destacados en el modo oscuro */
-    --muted: hsl(0 0% 16.08%);
+    --secondary-foreground: #fcc633;
+    /* Color para elementos menos destacados en el modo oscuro (arena oscuro) */
+    --muted: hsl(40, 60%, 20%);
     /* Color de texto para elementos menos importantes en el modo oscuro */
-    --muted-foreground: hsl(0 0% 63.9%);
-    /* Color para elementos de acento en el modo oscuro */
-    --accent: hsl(0 0% 14.9%);
+    --muted-foreground: hsl(44, 100%, 80%);
+    /* Color para elementos de acento en el modo oscuro (naranja intenso) */
+    --accent: hsl(32, 95%, 45%);
     /* Color de texto sobre los elementos de acento en el modo oscuro */
-    --accent-foreground: hsl(0 0% 98%);
-    /* Color para elementos destructivos en el modo oscuro */
-    --destructive: hsl(0 84% 60%);
+    --accent-foreground: #fcc633;
+    /* Color para elementos destructivos en el modo oscuro (rojo cálido) */
+    --destructive: hsl(10, 80%, 45%);
     /* Color de texto sobre los elementos destructivos en el modo oscuro */
-    --destructive-foreground: hsl(0 0% 98%);
-    /* Color del borde en el modo oscuro */
-    --border: hsl(0 0% 14.9%);
-    /* Color del fondo de los inputs en el modo oscuro */
-    --input: hsl(0 0% 14.9%);
-    /* Color del anillo de enfoque en el modo oscuro */
-    --ring: hsl(0 0% 83.1%);
-    /* Colores para gráficos en el modo oscuro */
-    --chart-1: hsl(220 70% 50%);
-    --chart-2: hsl(160 60% 45%);
-    --chart-3: hsl(30 80% 55%);
-    --chart-4: hsl(280 65% 60%);
-    --chart-5: hsl(340 75% 55%);
-    /* Color de fondo de la barra lateral en el modo oscuro */
-    --sidebar-background: hsl(0 0% 7%);
-    /* Color de texto en la barra lateral en el modo oscuro */
-    --sidebar-foreground: hsl(0 0% 95.9%);
-    /* Color primario en la barra lateral en el modo oscuro */
-    --sidebar-primary: hsl(360, 100%, 100%);
+    --destructive-foreground: #fcc633;
+    /* Color del borde en el modo oscuro (arena oscuro) */
+    --border: hsl(40, 60%, 20%);
+    /* Color del fondo de los inputs en el modo oscuro (marrón profundo) */
+    --input: hsl(30, 40%, 13%);
+    /* Color del anillo de enfoque en el modo oscuro (amarillo marca) */
+    --ring: #fcc633;
+    /* Colores para gráficos en el modo oscuro (paleta cálida) */
+    --chart-1: #fcc633;
+    --chart-2: #f89c1c;
+    --chart-3: #e86a1c;
+    --chart-4: #d94f04;
+    --chart-5: #b53f0a;
+    /* Color de fondo de la barra lateral en el modo oscuro (marrón profundo) */
+    --sidebar-background: hsl(30, 40%, 15%);
+    /* Color de texto en la barra lateral en el modo oscuro (amarillo marca) */
+    --sidebar-foreground: #fcc633;
+    /* Color primario en la barra lateral en el modo oscuro (amarillo marca) */
+    --sidebar-primary: #fcc633;
     /* Color de texto para el primario en la barra lateral en el modo oscuro */
-    --sidebar-primary-foreground: hsl(0 0% 100%);
-    /* Color de acento en la barra lateral en el modo oscuro */
-    --sidebar-accent: hsl(0 0% 15.9%);
+    --sidebar-primary-foreground: hsl(30, 40%, 15%);
+    /* Color de acento en la barra lateral en el modo oscuro (naranja intenso) */
+    --sidebar-accent: hsl(32, 95%, 45%);
     /* Color de texto para el acento en la barra lateral en el modo oscuro */
-    --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-    /* Color del borde de la barra lateral en el modo oscuro */
-    --sidebar-border: hsl(0 0% 15.9%);
-    /* Color del anillo de enfoque en la barra lateral en el modo oscuro */
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
-    /* Color adicional para la barra lateral en el modo oscuro */
-    --sidebar: hsl(240 5.9% 10%);
+    --sidebar-accent-foreground: #fcc633;
+    /* Color del borde de la barra lateral en el modo oscuro (arena oscuro) */
+    --sidebar-border: hsl(40, 60%, 20%);
+    /* Color del anillo de enfoque en la barra lateral en el modo oscuro (amarillo marca) */
+    --sidebar-ring: #fcc633;
+    /* Color adicional para la barra lateral en el modo oscuro (marrón profundo) */
+    --sidebar: hsl(30, 40%, 15%);
 }
-
 
 @layer base {
     * {

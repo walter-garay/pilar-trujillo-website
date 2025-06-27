@@ -14,7 +14,7 @@
         ></div>
         <!-- Background Video -->
         <video autoplay loop class="absolute top-0 left-0 h-full w-full object-cover">
-            <source src="/assets/video.mp4" type="video/mp4" />
+            <source src="/assets/videos/reencuentro_presentation.mp4" type="video/mp4" />
             Tu navegador no soporta la etiqueta de video.
         </video>
         <!-- Overlay suave -->

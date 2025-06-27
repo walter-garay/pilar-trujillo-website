@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('cover_image_url')->nullable(); // Cover image URL (nullable)
             $table->timestamp('publication_date')->nullable(); // Publication date (nullable)
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // Foreign key to Category
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key to User
+            $table->foreignId('user_id')->default(1)->constrained('users')->onDelete('cascade'); // Foreign key to User
             $table->json('tags')->nullable(); // Tags as JSON (nullable)
             $table->unsignedInteger('views_count')->default(0);
             $table->unsignedInteger('likes_count')->default(0);

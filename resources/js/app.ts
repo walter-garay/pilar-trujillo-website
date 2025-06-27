@@ -11,7 +11,7 @@ import { initializeTheme } from './composables/useAppearance';
 import ui from '@nuxt/ui/vue-plugin';
 import AppWrapper from './components/AppWrapper.vue';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Pilar Trujillo';
+const appName = import.meta.env.VITE_APP_NAME || 'Reencuentro';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

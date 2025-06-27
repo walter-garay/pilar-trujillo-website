@@ -41,7 +41,7 @@ const handleCloseModal = () => {
     <Head title="Administrar de Sponsors" />
     <AppLayout>
         <div class="p-6">
-            <h1 class="mb-6 text-2xl font-bold">Mis auspiciadores</h1>
+            <h1 class="mb-6 text-2xl font-bold">Auspiciadores</h1>
             <div class="mb-6 flex items-center gap-4">
                 <UInput v-model="search" placeholder="Buscar auspiciador por su nombre" class="w-full max-w-xs" />
                 <UButton color="primary" @click="handleAddSponsor">Agregar auspiciador</UButton>

@@ -46,7 +46,7 @@ const handleEdit = (publication: Publication) => {
     <Head title="Administrar Publicaciones" />
     <AppLayout>
         <div class="p-6">
-            <h1 class="mb-6 text-2xl font-bold">Mis publicaciones</h1>
+            <h1 class="mb-6 text-2xl font-bold">Publicaciones</h1>
             <div class="mb-6 flex items-center gap-4">
                 <UInput v-model="search" placeholder="Buscar publicación" class="w-full max-w-xs" />
                 <UButton color="primary" @click="handleAddPublication">Agregar publicación</UButton>
