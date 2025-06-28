@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
             PublicationSeeder::class,
             PublicationImageSeeder::class,
             SponsorSeeder::class,
-            MediaSeeder::class,
+            // MediaSeeder::class,
+            TelevisionSeeder::class,
+            ShortsSeeder::class,
+            ExclusiveSeeder::class,
         ]);
     }
 }
