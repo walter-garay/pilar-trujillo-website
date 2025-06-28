@@ -47,9 +47,39 @@ class ShortsSeeder extends Seeder
                 'description' => 'LA BIBLIOTECA SEMINARIO SAN TEODORO tiene un gran valor de carácter editorial por la antigüedad de las obras que salvaguarda, generalmente de carácter religioso.',
                 'file_url' => 'https://www.youtube.com/watch?v=ABVJzmb005k',
             ],
+            [
+                'title' => 'EL CARNAVAL DE HUANUQUEÑO DE ANTAÑO - NICOLÁS VIZCAYA',
+                'description' => 'EL CARNAVAL HUANUQUEÑO DE ANTAÑO es descrito por el tradicionalista Nicolás Vizcaya como una actividad socioeconómica trascendente al vincular directamente a los hombres del campo en atención directa a la demanda del área citadina.',
+                'file_url' => 'https://www.youtube.com/watch?v=3fYKdDJC2mA',
+            ],
+            // [
+            //     'title' => 'EL SR DE BURGOS Historia',
+            //     'description' => 'EL SR. DE BURGOS se registra históricamente desde sus orígenes en la ciudad de Burgos, su presencia en Lima y la representatividad que asume para el pueblo huanuqueño.',
+            //     'file_url' => 'https://www.youtube.com/watch?v=0SvGigMQqhE',
+            // ],
+            [
+                'title' => 'HUANUCO PAMPA',
+                'description' => 'HUANUCO PAMPA, es la presencia inca en territorio huanuqueño con elementos arquitectónicos muy representativos de aquella época, sobre todo el ushnu.',
+                'file_url' => 'https://www.youtube.com/watch?v=D9lW-thCALE',
+            ],
+            [
+                'title' => 'RODOLFO HOLZMANN',
+                'description' => 'RODOLFO HOLZMANN, es toda una biografía del maestro Rodolfo Holzman recreada visualmente.',
+                'file_url' => 'https://www.youtube.com/watch?v=0f--apwCuFE',
+            ],
+            [
+                'title' => 'CASA HACIENDA ANDABAMBA',
+                'description' => 'CASA HACIENDA ANDABAMBA, su historia asociada al origen de la danza de Los Negritos.',
+                'file_url' => 'https://www.youtube.com/watch?v=Akai4j6s3yo',
+            ],
         ];
 
         foreach ($shorts as $media) {
+            // Extraer el ID del video de YouTube
+            preg_match('/v=([\w-]+)/', $media['file_url'], $matches);
+            $videoId = $matches[1] ?? '';
+            $coverImageUrl = $videoId ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg" : null;
+
             Media::create(array_merge($media, [
                 'type' => 'short_video',
                 'publication_date' => '2025-06-25',
@@ -58,7 +88,7 @@ class ShortsSeeder extends Seeder
                 'tags' => json_encode(['reencuentro', 'pilar-trujillo', 'videos-cortos', 'short', 'destacable']),
                 'views_count' => 0,
                 'likes_count' => 0,
-                'cover_image_url' => null,
+                'cover_image_url' => $coverImageUrl,
             ]));
         }
     }

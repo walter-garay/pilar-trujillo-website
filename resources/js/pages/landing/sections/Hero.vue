@@ -52,11 +52,11 @@ onUnmounted(() => {
     <section class="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-background">
         <UContainer class="flex w-full flex-col gap-16 md:flex-row">
             <!-- Columna izquierda -->
-            <div class="flex flex-1 flex-col justify-center gap-6">
+            <div class="flex flex-1 flex-col items-center justify-center gap-6 text-center md:items-start md:text-left">
                 <div>
                     <img src="/assets/images/brand/imagotipo_name_left.png" alt="Reencuentro" class="w-92" />
 
-                    <p class="mt-10 max-w-xl pr-36 text-xl text-foreground/80">
+                    <p class="mt-10 max-w-xl md:pr-36 text-xl text-foreground/80">
                         Un medio que se expresa a través de quienes fueron protagonistas de su historia, para nutrir al hombre de hoy, ante los
                         grandes retos como el de construir un futuro memorioso, innovador, esencialmente humanista.
                     </p>

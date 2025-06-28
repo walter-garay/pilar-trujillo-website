@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             TelevisionSeeder::class,
             ShortsSeeder::class,
             ExclusiveSeeder::class,
+            RadioSeeder::class,
+            PodcastSeeder::class,
         ]);
     }
 }

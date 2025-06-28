@@ -19,19 +19,9 @@ class TelevisionSeeder extends Seeder
 
         $televisionPrograms = [
             [
-                'title' => 'REENCUENTRO 21 DE JUNIO DEL 2025',
-                'file_url' => 'https://www.youtube.com/watch?v=_FVXrBelqCo',
-                'description' => "1. Gran Complejo Cultural Huánuco.\n2. Huánuco Pampa.\n3. Fiesta de San Juan.\n4. Provincia de Puerto Inca.\n5. Quebrada de Agorragra-Llicua.\n6. Muru Raymi en Kichky.\n7. Vertiente Oriental de la Cordillera del Huayhuash.",
-            ],
-            [
                 'title' => 'REENCUENTRO 14 DE JUNIO DEL 2025',
                 'file_url' => 'https://www.youtube.com/watch?v=bUs2j0_BvJU',
                 'description' => "1. Museo Allpawasi.\n2. Virgilio López.\n3. Estanco y Aunkinmarka.\n4. Museo de Ciencias.\n5. Prestiños Huanuqueños.\n6. Aparicio Pomares.\n7. Fiesta de San Juan.\n8. Templo San Miguel de Huácar.\n9. Muri Raymi.",
-            ],
-            [
-                'title' => 'REENCUENTRO 07 DE JUNIO DEL 2025',
-                'file_url' => 'https://www.youtube.com/watch?v=jWuTixTiZWQ',
-                'description' => "1. Templo San Miguel de Huácar.\n2. Libro Chiuchi Mate.\n3. Capilla Huayopampa.\n4. Políticas Públicas para el manejo del Cáncer.\n5. Barrio El Beaterio.\n6. Templo San Cristóbal.",
             ],
             [
                 'title' => 'REENCUENTRO 31 DE MAYO DEL 2025',
@@ -53,9 +43,19 @@ class TelevisionSeeder extends Seeder
                 'file_url' => 'https://www.youtube.com/watch?v=MI2P9700BuU',
                 'description' => "1. Cannon Cantoria-Amor Eterno.\n2. Teresa Guerra Carhuapoma-Docente universitaria.\n3. El rol protagónico de la madre desde la percepción de la iglesia católica.\n4. Rebeca Fernández Palacios-Cantante y docente nivel primaria.\n5. Sac. Agustino Robert Prevost-Papa León XIV.",
             ],
+            [
+                'title' => 'MÚSICA DE LOS NEGRITOS',
+                'description' => 'MÚSICA DE LOS NEGRITOS, interesante y didáctica explicación sobre cada uno de los momentos musicales de la danza de Los Negritos.',
+                'file_url' => 'https://www.youtube.com/watch?v=sHO9hK4xCYY',
+            ],
         ];
 
         foreach ($televisionPrograms as $program) {
+            // Extraer el ID del video de YouTube
+            preg_match('/v=([\w-]+)/', $program['file_url'], $matches);
+            $videoId = $matches[1] ?? '';
+            $coverImageUrl = $videoId ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg" : null;
+
             Media::create(array_merge($program, [
                 'type' => 'television',
                 'publication_date' => '2025-06-25',
@@ -64,7 +64,7 @@ class TelevisionSeeder extends Seeder
                 'tags' => json_encode(['reencuentro', 'pilar-trujillo', 'televisión', 'programa', 'destacable']),
                 'views_count' => 0,
                 'likes_count' => 0,
-                'cover_image_url' => null,
+                'cover_image_url' => $coverImageUrl,
             ]));
         }
     }

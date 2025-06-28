@@ -60,6 +60,11 @@ class ExclusiveSeeder extends Seeder
         ];
 
         foreach ($exclusiveMedias as $media) {
+            // Extraer el ID del video de YouTube
+            preg_match('/v=([\w-]+)/', $media['file_url'], $matches);
+            $videoId = $matches[1] ?? '';
+            $coverImageUrl = $videoId ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg" : null;
+
             Media::create(array_merge($media, [
                 'type' => 'exclusive',
                 'publication_date' => '2025-06-25',
@@ -68,7 +73,7 @@ class ExclusiveSeeder extends Seeder
                 'tags' => json_encode(['reencuentro', 'pilar-trujillo', 'exclusivo', 'video', 'destacable']),
                 'views_count' => 0,
                 'likes_count' => 0,
-                'cover_image_url' => null,
+                'cover_image_url' => $coverImageUrl,
             ]));
         }
     }

@@ -24,9 +24,9 @@ defineProps<Props>();
         <div class="border-b border-border bg-card pt-16">
             <div class="container mx-auto px-4 py-12">
                 <div class="space-y-4 text-center">
-                    <h1 class="text-4xl font-bold text-primary">Catálogo de Publicaciones</h1>
+                    <h1 class="text-4xl font-bold text-primary">Publicaciones</h1>
                     <p class="mx-auto max-w-2xl text-lg text-muted-foreground">
-                        Descubre artículos, ensayos y reflexiones sobre cultura, arte y sociedad que inspiran y transforman nuestra visión del mundo
+                        Descubre artículos, ensayos y reflexiones sobre cultura, arte y sociedad que inspiran y transforman nuestra visión de Huánuco
                     </p>
                 </div>
             </div>

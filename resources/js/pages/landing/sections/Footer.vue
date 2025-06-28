@@ -139,7 +139,7 @@ const donationLink = getWhatsAppLink(
                     </div>
                     <div>
                         <h3 class="font-semibold text-foreground">Colaborador</h3>
-                        <p class="mt-4 text-sm text-muted-foreground">Apoya el periodismo independiente y ayúdame a contar más historias.</p>
+                        <p class="mt-4 text-sm text-muted-foreground">Apoya el periodismo cultural y ayúdanos a contar más historias.</p>
                         <div class="mt-4 flex flex-col gap-3">
                             <UButton
                                 :to="collaborationLink"

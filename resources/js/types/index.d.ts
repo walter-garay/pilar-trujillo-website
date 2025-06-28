@@ -46,7 +46,7 @@ export interface Media {
     description: string;
     file_url: string;
     type: 'television' | 'short_video' | 'radio' | 'podcast' | 'audiobook';
-    cover_image_url: string;
+    cover_image_url?: string ;
     publication_date: string;
     category_id: number;
     user_id: number;

@@ -74,6 +74,21 @@ const toggleLike = async () => {
         });
     }
 };
+
+// Funciones auxiliares para detectar tipos de archivo
+const isYoutubeUrl = (url: string): boolean => {
+    return url.includes('youtube.com') || url.includes('youtu.be');
+};
+
+const isAudioFile = (url: string): boolean => {
+    const audioExtensions = ['.mp3', '.wav', '.ogg', '.m4a', '.aac'];
+    return audioExtensions.some((ext) => url.toLowerCase().includes(ext));
+};
+
+const isVideoFile = (url: string): boolean => {
+    const videoExtensions = ['.mp4', '.webm', '.ogg', '.avi', '.mov'];
+    return videoExtensions.some((ext) => url.toLowerCase().includes(ext));
+};
 </script>
 
 <template>
@@ -87,16 +102,47 @@ const toggleLike = async () => {
         <div class="p-6">
             <div v-if="props.media" class="space-y-4">
                 <div class="aspect-video overflow-hidden rounded-lg bg-muted">
-                    <template v-if="props.currentType === 'television' && props.media.file_url">
+                    <template v-if="props.media.file_url && isYoutubeUrl(props.media.file_url) && props.media.type === 'radio'">
+                        <div class="flex h-full w-full items-center justify-center">
+                            <a
+                                :href="props.media.file_url"
+                                target="_blank"
+                                rel="noopener"
+                                class="inline-flex items-center gap-2 rounded bg-primary px-4 py-2 text-white shadow transition hover:bg-primary/90"
+                            >
+                                <UIcon name="i-lucide-youtube" class="h-5 w-5 text-white" />
+                                Ver en YouTube
+                            </a>
+                        </div>
+                    </template>
+                    <template v-else-if="props.media.file_url && isYoutubeUrl(props.media.file_url)">
                         <iframe
-                            :src="getYoutubeEmbedUrl(props.media.file_url) + '?showinfo=0&controls=1&rel=0'"
+                            :src="getYoutubeEmbedUrl(props.media.file_url) + '?rel=0&controls=1&modestbranding=1&showinfo=0'"
                             frameborder="0"
                             color="white"
                             allowfullscreen
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             class="h-full w-full rounded-lg"
                             title="Reproductor de video de YouTube"
                         ></iframe>
+                    </template>
+                    <template v-else-if="props.media.file_url && isAudioFile(props.media.file_url)">
+                        <div class="flex h-full w-full items-center justify-center bg-muted">
+                            <audio controls class="w-full max-w-md">
+                                <source :src="props.media.file_url" type="audio/mpeg" />
+                                <source :src="props.media.file_url" type="audio/mp3" />
+                                <source :src="props.media.file_url" type="audio/wav" />
+                                Tu navegador no soporta el elemento de audio.
+                            </audio>
+                        </div>
+                    </template>
+                    <template v-else-if="props.media.file_url && isVideoFile(props.media.file_url)">
+                        <video controls class="h-full w-full rounded-lg" :key="props.media.id || props.media.file_url" controlsList="nodownload">
+                            <source :src="props.media.file_url" type="video/mp4" />
+                            <source :src="props.media.file_url" type="video/webm" />
+                            <source :src="props.media.file_url" type="video/ogg" />
+                            Tu navegador no soporta el elemento de video.
+                        </video>
                     </template>
                     <template v-else>
                         <img :src="props.media.cover_image_url" :alt="props.media.title" class="h-full w-full object-cover" />
@@ -129,10 +175,10 @@ const toggleLike = async () => {
                     </div>
                 </div>
             </div>
-            <div v-else class="flex flex-col items-center justify-center py-12 text-center">
-                <UIcon name="i-lucide-alert-triangle" class="mb-4 h-16 w-16 text-red-500" />
-                <p class="mt-4 text-lg font-semibold text-red-500">Recurso no encontrado</p>
-                <p class="text-muted-foreground">Por favor seleccione otro elemento de la lista</p>
+            <div v-else class="flex flex-1 flex-col items-center justify-center gap-6 text-center md:items-start md:text-left">
+                <UIcon name="i-lucide-info" class="mb-4 h-16 w-16 text-primary" />
+                <p class="mt-4 text-lg font-semibold text-foreground">No encontrado</p>
+                <p class="text-muted-foreground">Seguimos trabajando para brindar más contenido de calidad.</p>
             </div>
         </div>
     </UCard>

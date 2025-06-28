@@ -37,5 +37,6 @@ export function getYoutubeEmbedUrl(url: string): string {
         console.error('Error processing the YouTube URL:', error);
     }
 
+    console.log("id dev: ", videoId)
     return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 }

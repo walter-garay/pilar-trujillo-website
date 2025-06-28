@@ -8,6 +8,7 @@ interface Props {
 
 const { sponsors, phone } = defineProps<Props>();
 
+console.log('spnosr: ', sponsors);
 // Generar enlaces de WhatsApp dinámicamente
 const getWhatsAppLink = (message: string) => {
     if (!phone) return '#';
@@ -41,15 +42,17 @@ const donationLink = getWhatsAppLink(
                 <UCard
                     v-for="sponsor in sponsors"
                     :key="sponsor.id"
-                    class="overflow-hidden text-center transition-transform duration-300 ease-in-out hover:-translate-y-2 bg-card"
+                    class="overflow-hidden bg-card text-center transition-transform duration-300 ease-in-out hover:-translate-y-2"
                 >
-                    <img :src="sponsor.logo_url" :alt="sponsor.name" class="mb-4 aspect-video w-full rounded-md object-cover" />
+                    <div class="mb-4 flex aspect-video w-full items-center justify-center rounded-md bg-white p-4">
+                        <img :src="sponsor.logo_url" :alt="sponsor.name" class="max-h-full max-w-full rounded-md object-contain" />
+                    </div>
                     <h3 class="text-lg font-bold text-foreground">{{ sponsor.name }}</h3>
                     <p class="mt-1 text-sm text-muted-foreground">{{ sponsor.description }}</p>
 
                     <template #footer>
                         <a
-                            :href="sponsor.media_url"
+                            :href="sponsor.website_url || ''"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="flex items-center justify-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/80"

@@ -158,7 +158,7 @@ class MediaController extends Controller
             ->where('type', $dbType)
             ->latest('created_at')
             ->get();
-            
+
         $categories = Category::where('type', 'media')->get();
 
         return Inertia::render('admin/multimedia/MediaManagement', [

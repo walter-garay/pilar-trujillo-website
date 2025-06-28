@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Publication;
+use App\Models\PublicationImage;
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PublicationSeeder extends Seeder
@@ -14,121 +14,188 @@ class PublicationSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear categorías necesarias
-        $categories = [
-            ['id' => 1, 'name' => 'Periodismo', 'type' => 'publication'],
-            ['id' => 2, 'name' => 'Comunicación', 'type' => 'publication'],
-            ['id' => 3, 'name' => 'Audio', 'type' => 'publication'],
-        ];
-        foreach ($categories as $cat) {
-            Category::updateOrCreate(['id' => $cat['id']], $cat);
-        }
+        // Buscar la categoría 'Destacable' de tipo 'publication'
+        $category = Category::where('name', 'Destacable')->where('type', 'publication')->first();
 
         $publications = [
             [
-                'title' => 'El futuro del periodismo',
-                'content' => 'Un análisis sobre el impacto de la tecnología en el periodismo actual.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 1,
-                'tags' => json_encode(['periodismo', 'tecnología']),
-                'references' => json_encode(['https://ejemplo.com/futuro']),
-                'views_count' => 120,
+                'title' => 'ENTREVISTA: ING. LUIS GUZMÁN BARRÓN SOBREVIILLA',
+                'references' => [
+                    'url' => 'https://www.elespectador.com',
+                    'name' => 'El Espectador',
+                ],
             ],
             [
-                'title' => 'La ética en los medios',
-                'content' => 'Reflexión sobre la importancia de la ética en la comunicación.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 2,
-                'tags' => json_encode(['ética', 'medios']),
-                'references' => json_encode(['https://ejemplo.com/etica']),
-                'views_count' => 85,
+                'title' => 'DR. JOSE VARALLANOS - La fundación española de la ciudad de Huánuco',
+                'references' => [
+                    'url' => 'https://www.elespectador.com',
+                    'name' => 'El Espectador',
+                ],
             ],
             [
-                'title' => 'Cobertura de conflictos internacionales',
-                'content' => 'Cómo los medios abordan la cobertura de guerras y conflictos.',
-                'status' => 'archived',
-                'author_id' => 1,
-                'category_id' => 1,
-                'tags' => json_encode(['conflictos', 'internacional']),
-                'references' => json_encode(['https://ejemplo.com/conflictos']),
-                'views_count' => 200,
+                'title' => 'La crónica de un estilo literario - DR. VIRGILIO LÓPEZ CALDERÓN',
+                'references' => [
+                    'url' => 'https://www.elespectador.com',
+                    'name' => 'El Espectador',
+                ],
             ],
             [
-                'title' => 'El auge de los podcasts',
-                'content' => 'Por qué los podcasts se han vuelto tan populares en la última década.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 3,
-                'tags' => json_encode(['podcast', 'audio']),
-                'references' => json_encode(['https://ejemplo.com/podcasts']),
-                'views_count' => 60,
+                'title' => 'Milenaria danza agrícola - MAMA RAYHUANA. Escenificación del sembrío de los tubérculos andinos y del maíz',
+                'references' => [
+                    'url' => 'https://www.elespectador.com',
+                    'name' => 'El Espectador',
+                ],
             ],
             [
-                'title' => 'Fake news y desinformación',
-                'content' => 'Estrategias para combatir la desinformación en la era digital.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 2,
-                'tags' => json_encode(['fake news', 'desinformación']),
-                'references' => json_encode(['https://ejemplo.com/fakenews']),
-                'views_count' => 300,
+                'title' => "SEMBLANZA SERGIO D'AMBROSIO ROBLES - Cantante y compositor, un músico que vive de su arte",
+                'references' => [
+                    'url' => 'https://www.elespectador.com',
+                    'name' => 'El Espectador',
+                ],
+            ],
+            // Nuevos registros Diario Ahora 2010
+            [
+                'title' => 'EL BOSQUE DE NEBLINA DE CARPISH - Entre la altivez andina y la exuberancia de la selva',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
             ],
             [
-                'title' => 'Periodismo de investigación',
-                'content' => 'El valor del periodismo de investigación en la sociedad.',
-                'status' => 'archived',
-                'author_id' => 1,
-                'category_id' => 1,
-                'tags' => json_encode(['investigación', 'sociedad']),
-                'references' => json_encode(['https://ejemplo.com/investigacion']),
-                'views_count' => 150,
+                'title' => 'SHILLACOTO - Huella de la mutilación de nuestra historia',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
             ],
             [
-                'title' => 'Redes sociales y opinión pública',
-                'content' => 'El papel de las redes sociales en la formación de la opinión pública.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 2,
-                'tags' => json_encode(['redes sociales', 'opinión']),
-                'references' => json_encode(['https://ejemplo.com/redes']),
-                'views_count' => 90,
+                'title' => 'RODOLFO HOLZMANN - Compositor, etnomusicólogo y maestro forjador de talentos.',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
             ],
             [
-                'title' => 'La evolución de la radio',
-                'content' => 'De la radio tradicional a la radio digital.',
-                'status' => 'archived',
-                'author_id' => 1,
-                'category_id' => 3,
-                'tags' => json_encode(['radio', 'digital']),
-                'references' => json_encode(['https://ejemplo.com/radio']),
-                'views_count' => 45,
+                'title' => 'GARU - Arquitectura que reta el paso del tiempo',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
             ],
             [
-                'title' => 'Narrativas visuales',
-                'content' => 'El poder de la imagen en la comunicación moderna.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 1,
-                'tags' => json_encode(['visual', 'imagen']),
-                'references' => json_encode(['https://ejemplo.com/visual']),
-                'views_count' => 110,
+                'title' => 'SAMUEL CARDICH AMPUDIA',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
             ],
             [
-                'title' => 'Tendencias en medios digitales',
-                'content' => 'Principales tendencias que están transformando los medios digitales.',
-                'status' => 'active',
-                'author_id' => 1,
-                'category_id' => 2,
-                'tags' => json_encode(['tendencias', 'digital']),
-                'references' => json_encode(['https://ejemplo.com/tendencias']),
-                'views_count' => 75,
+                'title' => 'HISTORIA DEL GUARDIÁN DE LA MEMORIA NACIONAL',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'MONTE POTRERO - Fuente hídrica de Umari, pulmón de la humanidad',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'LAS ORQUÍDEAS, - INMENSAS O DIMINUTAS: SIEMPRE PRECIOSAS',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'EL SEÑORIAL RIO HUALLAGA',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'LAS NACIENTES DEL RIO HUALLAGA',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'NÉSTOR ARMAS Y EL MUSEO DE CIENCIAS',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+
+            // Nuevos registros ANTORCHA 2010
+            [
+                'title' => 'JAVIER PULGAR VIDAL - UNA VIDA DESTINADA AL MAGISTERIO DESDE EL PRINCIPIO',
+                'references' => [
+                    'url' => '',
+                    'name' => 'ANTORCHA 2010',
+                ],
+            ],
+            [
+                'title' => 'SALVEMOS NUESTROS MONUMENTOS HISTÓRICOS',
+                'references' => [
+                    'url' => '',
+                    'name' => 'ANTORCHA 2010',
+                ],
+            ],
+            // Nuevos registros Diario Ahora
+            [
+                'title' => 'PADRE AGUSTINO MARCOS DURÁN MARTEL',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'Daniel Alomía Robles - Gloria de la música autóctona, genuino intérprete del sentido del alma indígena.',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'Francisco Gumersindo Atencia Ramírez - Maestro, compositor y músico.',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
+            ],
+            [
+                'title' => 'GEOLOGÍA DE LA CIUDAD DE HUÁNUCO',
+                'references' => [
+                    'url' => 'https://ahora.com.pe',
+                    'name' => 'Diario Ahora',
+                ],
             ],
         ];
 
         foreach ($publications as $pub) {
-            Publication::create($pub);
+            $publication = Publication::create([
+                'title' => $pub['title'],
+                'status' => 'active',
+                'author_id' => 1,
+                'category_id' => $category->id,
+                'views_count' => 0,
+                'tags' => json_encode(["periodismo", "reencuntro", "pilar-trujillo", "medios"]),
+                'content' => '',
+                'references' => json_encode($pub['references']),
+            ]);
+
+            // Aquí puedes agregar la(s) imagen(es) asociada(s) a la publicación
+            // PublicationImage::create([
+            //     'publication_id' => $publication->id,
+            //     'file_url' => 'URL_DE_LA_IMAGEN',
+            //     'caption' => 'Descripción de la imagen',
+            // ]);
         }
     }
 }

@@ -98,13 +98,13 @@ class PublicationController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'nullable|string',
             'status' => 'required|in:active,archived',
-            'author_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
             'tags' => 'nullable',
             'references' => 'nullable',
             'views_count' => 'nullable|integer|min:0',
         ]);
 
+        $validated['author_id'] = Auth::id();
         $publication->update($validated);
 
         return redirect()->route('admin.publications')->with('success', 'Publicación actualizada exitosamente.');

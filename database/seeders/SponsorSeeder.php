@@ -87,8 +87,8 @@ class SponsorSeeder extends Seeder
                 'email' => '',
                 'phone' => '',
                 'social_media_urls' => json_encode([]),
-                'promotion_start' => now(),
-                'promotion_end' => '2026-06-27 23:59:59',
+                'promotion_start' => '2024-01-01 00:00:00',
+                'promotion_end' => '2027-12-31 23:59:59',
             ]));
         }
     }
