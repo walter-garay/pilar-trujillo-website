@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Sponsor } from '@/types';
+import { getYoutubeEmbedUrl } from '@/lib/utils';
 
 interface Props {
     sponsors?: Sponsor[];
@@ -24,6 +25,12 @@ const collaborationLink = getWhatsAppLink(
 const donationLink = getWhatsAppLink(
     'Hola, Pilar, mucho gusto!\n\nVi tu trabajo y me encanta. Me gustaría poder colaborar contigo en forma de *donación*. 💌',
 );
+
+const getLogoUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('/assets') || url.startsWith('http')) return url;
+    return '/storage/' + url.replace(/^storage[\\/]/, '');
+};
 </script>
 
 <template>
@@ -44,8 +51,23 @@ const donationLink = getWhatsAppLink(
                     :key="sponsor.id"
                     class="overflow-hidden bg-card text-center transition-transform duration-300 ease-in-out hover:-translate-y-2"
                 >
-                    <div class="mb-4 flex aspect-video w-full items-center justify-center rounded-md bg-white p-4">
-                        <img :src="sponsor.logo_url" :alt="sponsor.name" class="max-h-full max-w-full rounded-md object-contain" />
+                    <div
+                        v-if="sponsor.media_url"
+                        class="mb-4 flex aspect-video w-full items-center justify-center rounded-md bg-white"
+                        style="padding:0; height:100%"
+                    >
+                        <iframe
+                            :src="getYoutubeEmbedUrl(sponsor.media_url)"
+                            frameborder="0"
+                            allowfullscreen
+                            class="w-full h-full rounded-md"
+                        ></iframe>
+                    </div>
+                    <div
+                        v-else
+                        class="mb-4 flex aspect-video w-full items-center justify-center rounded-md bg-white p-4"
+                    >
+                        <img :src="getLogoUrl(sponsor.logo_url)" :alt="sponsor.name" class="max-h-full max-w-full rounded-md object-contain" />
                     </div>
                     <h3 class="text-lg font-bold text-foreground">{{ sponsor.name }}</h3>
                     <p class="mt-1 text-sm text-muted-foreground">{{ sponsor.description }}</p>

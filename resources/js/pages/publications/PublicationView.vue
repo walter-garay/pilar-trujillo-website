@@ -51,6 +51,12 @@ const goNext = () => {
         currentIndex.value = (currentIndex.value + 1) % images.value.length;
     }
 };
+
+function getImageUrl(url: string) {
+    if (!url) return '';
+    if (url.startsWith('/assets') || url.startsWith('http')) return url;
+    return '/storage/' + url.replace(/^storage[\\/]/, '');
+}
 </script>
 
 <template>
@@ -72,7 +78,7 @@ const goNext = () => {
                     </svg>
                 </button>
                 <div class="carousel-img-wrapper">
-                    <img :src="images[currentIndex].file_url" alt="Imagen de la publicación" class="carousel-img" />
+                    <img :src="getImageUrl(images[currentIndex].file_url)" alt="Imagen de la publicación" class="carousel-img" />
                 </div>
                 <button v-if="images.length > 1" class="carousel-btn right" @click="goNext" aria-label="Siguiente">
                     <svg width="32" height="32" fill="none" viewBox="0 0 24 24">

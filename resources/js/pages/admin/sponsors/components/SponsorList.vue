@@ -60,15 +60,25 @@ const cancelDelete = () => {
     showConfirm.value = false;
     sponsorToDelete.value = null;
 };
+
+function getLogoUrl(url: string) {
+    if (!url) return '';
+    if (url.startsWith('/assets') || url.startsWith('http')) return url;
+    return '/storage/' + url.replace(/^storage[\\/]/, '');
+}
 </script>
 
 <template>
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-
         <!-- Card de auspiciador -->
         <UCard v-for="sponsor in props.sponsors" :key="sponsor.id" class="flex flex-col">
             <div class="mb-4 flex items-center gap-4">
-                <img v-if="sponsor.logo_url" :src="sponsor.logo_url" :alt="sponsor.name" class="h-16 w-16 rounded-full border object-cover" />
+                <img
+                    v-if="sponsor.logo_url"
+                    :src="getLogoUrl(sponsor.logo_url)"
+                    :alt="sponsor.name"
+                    class="h-16 w-16 rounded-full border object-cover"
+                />
                 <div>
                     <h2 class="text-lg font-bold">{{ sponsor.name }}</h2>
                     <p class="text-xs text-muted-foreground">{{ sponsor.email }}</p>

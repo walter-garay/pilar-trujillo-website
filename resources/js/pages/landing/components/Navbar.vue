@@ -1,8 +1,6 @@
 <template>
     <header class="w-full border-b border-border/20 bg-[#fcc633] shadow">
         <nav class="mx-auto flex h-12 max-w-7xl items-center px-4">
-
-
             <!-- Enlaces centrados para pantallas grandes -->
             <div class="hidden items-center gap-8 md:flex md:flex-1 md:justify-center">
                 <UButton variant="ghost" class="font-bold text-black underline-offset-4 hover:underline" color="primary" to="/">Reencuentro</UButton>
@@ -28,7 +26,7 @@
                                 variant="ghost"
                                 color="primary"
                                 :to="item.to"
-                                class="w-full justify-start text-black underline-offset-4 hover:underline"
+                                :class="['w-full justify-start underline-offset-4 hover:underline', isDark ? 'text-primary' : 'text-black']"
                             >
                                 <UIcon :name="item.icon" class="mr-2 h-4 w-4" />
                                 {{ item.label }}
@@ -36,6 +34,18 @@
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
+            </div>
+
+            <!-- Switch de tema claro/oscuro con USwitch -->
+            <div class="ml-auto flex items-center gap-2">
+                <USwitch
+                    v-model="isDark"
+                    unchecked-icon="i-lucide-sun"
+                    checked-icon="i-lucide-moon"
+                    color="neutral"
+                    :class="'ring-2 ring-ring'"
+                    :aria-label="isDark ? 'Tema oscuro' : 'Tema claro'"
+                />
             </div>
 
             <!-- Botón de menú para móviles -->
@@ -124,7 +134,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useMediaTabs } from '@/composables/useMediaTabs';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const { items: mediaTabs } = useMediaTabs();
 
@@ -157,5 +167,16 @@ onMounted(() => {
 });
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+});
+
+// Switch de tema claro/oscuro
+const isDark = ref(document.documentElement.classList.contains('dark'));
+
+watch(isDark, (val) => {
+    if (val) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
 });
 </script>

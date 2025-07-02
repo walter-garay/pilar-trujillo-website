@@ -163,23 +163,15 @@ const onSubmit = () => {
                         </UFormField>
 
                         <UFormField label="Descripción corta" name="description">
-                            <UInput v-model="state.description" class="w-full" />
+                            <UTextarea v-model="state.description" class="w-full" :rows="2" />
                         </UFormField>
 
-                        <UFormField label="Email" name="email">
-                            <UInput v-model="state.email" type="email" class="w-full" />
-                        </UFormField>
-
-                        <div class="flex flex-col gap-4 md:flex-row">
-                            <UFormField label="Número de contacto" name="phone" class="flex-1">
-                                <UInput v-model="state.phone" class="w-full" />
-                            </UFormField>
-                            <UFormField label="Link del anuncio o imagen" name="media_url" class="flex-1">
-                                <UInput v-model="state.media_url" class="w-full" />
-                            </UFormField>
-                        </div>
-                        <UFormField label="Sitio web" name="website_url">
+                        <UFormField label="Sitio web o red social (Facebook, Instagram, etc.)" name="website_url">
                             <UInput v-model="state.website_url" class="w-full" />
+                        </UFormField>
+
+                        <UFormField label="Link del video publicitario (Youtube)" name="media_url">
+                            <UInput v-model="state.media_url" class="w-full" />
                         </UFormField>
 
                         <div class="flex flex-col gap-4 md:flex-row">
@@ -195,6 +187,18 @@ const onSubmit = () => {
                             <p class="text-sm text-blue-700">
                                 <strong>Duración del auspicio:</strong> {{ daysOfSponsorship }} día{{ daysOfSponsorship !== 1 ? 's' : '' }}
                             </p>
+                        </div>
+
+                        <div class="pt-2">
+                            <div class="mb-2 text-sm font-semibold text-neutral-700">Información de contacto extra</div>
+                            <div class="flex flex-col gap-4 md:flex-row">
+                                <UFormField label="Email" name="email" class="flex-1">
+                                    <UInput v-model="state.email" type="email" class="w-full" />
+                                </UFormField>
+                                <UFormField label="Número o teléfono" name="phone" class="flex-1">
+                                    <UInput v-model="state.phone" class="w-full" />
+                                </UFormField>
+                            </div>
                         </div>
 
                         <div class="mt-6 flex justify-end gap-2">

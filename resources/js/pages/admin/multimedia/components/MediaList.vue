@@ -72,7 +72,7 @@ const cancelDelete = () => {
 
 const copiedId = ref<number | null>(null);
 function copyLink(id: number) {
-    const url = `${window.location.origin}/multimedia/exclusive/${id}`;
+    const url = `${window.location.origin}/multimedia/exclusive/${id}?password=reencuentro2024`;
     navigator.clipboard.writeText(url);
     copiedId.value = id;
     setTimeout(() => {

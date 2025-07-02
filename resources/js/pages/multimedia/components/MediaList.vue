@@ -20,6 +20,8 @@ const emit = defineEmits<{
 const PAGE_SIZE = 5; // Puedes ajustar el tamaño de página aquí
 const currentPage = ref(1);
 
+const DEFAULT_PASSWORD = 'reencuentro2024';
+
 // Calcular la página de la media seleccionada al cargar
 watch(
     [() => props.medias, () => props.selectedMediaId],
@@ -63,6 +65,14 @@ const formatTypeName = (type: string) => {
     };
     return names[type as keyof typeof names] || type;
 };
+
+function getMediaLink(media: Media) {
+    let url = `/multimedia/${media.type}/${media.id}`;
+    if (media.type === 'exclusive') {
+        url += `?password=${DEFAULT_PASSWORD}`;
+    }
+    return url;
+}
 </script>
 
 <template>

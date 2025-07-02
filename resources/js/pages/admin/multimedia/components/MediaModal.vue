@@ -16,13 +16,15 @@ watch(internalOpen, (val) => emit('update:open', val));
 
 const isEdit = computed(() => !!props.media && !!props.media.id);
 
+const now = new Date().toISOString().slice(0, 16);
+
 const state = ref({
     title: '',
     description: '',
     file_url: '',
     cover_image_url: '',
     type: props.type,
-    publication_date: '',
+    publication_date: now,
     category_id: 1,
     tags: [] as string[],
 });
@@ -150,25 +152,31 @@ const onSubmit = () => {
                             <UInput v-model="state.title" required class="w-full" />
                         </UFormField>
                         <UFormField label="Descripción" name="description">
-                            <UTextarea v-model="state.description" class="min-h-[80px] w-full" />
+                            <UTextarea v-model="state.description" class="min-h-[80px] w-full" placeholder="Descripción breve del contenido" />
                         </UFormField>
-                        <UFormField label="Archivo (URL)" name="file_url">
-                            <UInput v-model="state.file_url" required class="w-full" />
+                        <UFormField label="Link del video de Youtube" name="file_url">
+                            <UInput v-model="state.file_url" required class="w-full" placeholder="https://youtube.com/watch?v=..." />
                         </UFormField>
-                        <UFormField label="Imagen de portada (URL)" name="cover_image_url">
-                            <UInput v-model="state.cover_image_url" class="w-full" />
+                        <UFormField
+                            label="Link de la imagen de portada"
+                            name="cover_image_url"
+                            sublabel="Se asigna automáticamente la de Youtube si no se indica"
+                        >
+                            <UInput v-model="state.cover_image_url" class="w-full" placeholder="Por defecto se asigna la de Youtube (opcional)" />
                         </UFormField>
-                        <UFormField label="Tipo" name="type">
-                            <UInput v-model="state.type" class="w-full" disabled />
-                        </UFormField>
+                        <div class="flex flex-col gap-4 md:flex-row">
+                            <UFormField label="Tipo" name="type" class="flex-1">
+                                <UInput v-model="state.type" class="w-full" disabled />
+                            </UFormField>
+                            <UFormField label="Categoría" name="category_id" class="flex-1">
+                                <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" :portal="false" />
+                            </UFormField>
+                        </div>
                         <UFormField label="Fecha de publicación" name="publication_date">
                             <UInput v-model="state.publication_date" type="datetime-local" class="w-full" />
                         </UFormField>
-                        <UFormField label="Categoría" name="category_id">
-                            <USelect v-model="state.category_id" :items="categoryItems" value-key="id" class="w-full" :portal="false" />
-                        </UFormField>
                         <UFormField label="Etiquetas (tags)" name="tags">
-                            <UInputTags v-model="state.tags" class="w-full" />
+                            <UInputTags v-model="state.tags" class="w-full" placeholder="Ej: cultura, historia, entrevista" />
                         </UFormField>
                         <div class="mt-6 flex justify-end gap-2">
                             <UButton type="button" color="neutral" variant="outline" @click="emit('update:open', false)">Cancelar</UButton>

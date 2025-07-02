@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/publicaciones/create', [PublicationController::class, 'create'])->name('admin.publications.create');
     Route::get('/admin/publicaciones/{publication}/edit', [PublicationController::class, 'edit'])->name('admin.publications.edit');
     Route::post('/admin/publicaciones', [PublicationController::class, 'store'])->name('admin.publications.store');
-    Route::put('/admin/publicaciones/{publication}', [PublicationController::class, 'update'])->name('admin.publications.update');
+    Route::post('/admin/publicaciones/{publication}', [PublicationController::class, 'update'])->name('admin.publications.update');
     Route::delete('/admin/publicaciones/{publication}', [PublicationController::class, 'destroy'])->name('admin.publications.destroy');
 
     // Medias admin

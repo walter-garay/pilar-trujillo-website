@@ -58,6 +58,12 @@ const cancelDelete = () => {
 const goToEdit = (publication: Publication) => {
     router.visit(route('admin.publications.edit', publication.id));
 };
+
+function getImageUrl(url: string) {
+    if (!url) return '';
+    if (url.startsWith('/assets') || url.startsWith('http')) return url;
+    return '/storage/' + url.replace(/^storage[\\/]/, '');
+}
 </script>
 
 <template>
@@ -66,7 +72,7 @@ const goToEdit = (publication: Publication) => {
             <UCard v-for="pub in props.publications" :key="pub.id" class="flex flex-col">
                 <div class="flex flex-1 flex-col gap-2">
                     <div v-if="pub.images && pub.images.length" class="mb-2">
-                        <img :src="pub.images[0].file_url" :alt="pub.title" class="h-40 w-full rounded object-cover" />
+                        <img :src="getImageUrl(pub.images[0].file_url)" :alt="pub.title" class="h-40 w-full rounded object-cover" />
                     </div>
                     <h2 class="line-clamp-2 text-lg font-bold">{{ pub.title }}</h2>
                     <div class="flex items-center gap-2 text-xs text-muted-foreground">

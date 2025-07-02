@@ -19,6 +19,14 @@ class MediaController extends Controller
         $types = ['television', 'short_video', 'radio', 'podcast', 'audiobook', 'exclusive'];
         $selectedType = in_array($type, $types) ? $type : 'television';
 
+        // Validar contraseña para exclusivos
+        if ($selectedType === 'exclusive') {
+            $password = $request->query('password');
+            if ($password !== 'reencuentro2024') {
+                return redirect('/');
+            }
+        }
+
         $mediasQuery = Media::with('category')
             ->where('type', $selectedType)
             ->latest('publication_date');

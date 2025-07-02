@@ -24,6 +24,7 @@ yarn-error.log
 /.zed
 
 /build
+/build
 
 # Auto-generated type declarations
 auto-imports.d.ts

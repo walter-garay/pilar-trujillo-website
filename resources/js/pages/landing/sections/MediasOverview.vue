@@ -44,7 +44,7 @@ function openVideoModal(video: Media) {
             >
                 <template #television>
                     <div class="flex flex-col items-center gap-8">
-                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid w-full grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
                             <VideoCard
                                 v-for="video in props.medias?.television"
                                 :key="video.id"
@@ -62,7 +62,7 @@ function openVideoModal(video: Media) {
                 </template>
                 <template #short_video>
                     <div class="flex flex-col items-center gap-8">
-                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid w-full grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
                             <VideoCard
                                 v-for="video in props.medias?.short_video"
                                 :key="video.id"
@@ -80,7 +80,7 @@ function openVideoModal(video: Media) {
                 </template>
                 <template #radio>
                     <div class="flex flex-col items-center gap-8">
-                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid w-full grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
                             <VideoCard
                                 v-for="video in props.medias?.radio"
                                 :key="video.id"
@@ -98,7 +98,7 @@ function openVideoModal(video: Media) {
                 </template>
                 <template #podcast>
                     <div class="flex flex-col items-center gap-8">
-                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid w-full grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
                             <VideoCard
                                 v-for="video in props.medias?.podcast"
                                 :key="video.id"
@@ -116,7 +116,7 @@ function openVideoModal(video: Media) {
                 </template>
                 <template #audiobook>
                     <div class="flex flex-col items-center gap-8">
-                        <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid w-full grid-cols-1 justify-items-center gap-6 md:grid-cols-2 lg:grid-cols-3">
                             <VideoCard
                                 v-for="video in props.medias?.audiobook"
                                 :key="video.id"

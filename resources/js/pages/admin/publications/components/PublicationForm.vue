@@ -62,22 +62,66 @@ watch(
 
 const toast = useToast();
 
+const images = ref<File[]>([]);
+const imagePreviews = ref<string[]>([]);
+const existingImages = ref<{ id: number; file_url: string }[]>(
+    (props.publication?.images || []).map((img: any, idx: number) => ({
+        id: img.id ?? idx,
+        file_url: img.file_url,
+    })),
+);
+const imagesToDelete = ref<number[]>([]);
+
+function handleImageChange(e: Event) {
+    const target = e.target as HTMLInputElement;
+    if (target.files) {
+        const files = Array.from(target.files).slice(0, 5);
+        images.value = files;
+        imagePreviews.value = files.map((file) => URL.createObjectURL(file));
+    }
+}
+
+function removeImage(index: number) {
+    images.value.splice(index, 1);
+    imagePreviews.value.splice(index, 1);
+}
+
+function getImageUrl(url: string) {
+    if (!url) return '';
+    if (url.startsWith('/assets') || url.startsWith('http')) return url;
+    return '/storage/' + url.replace(/^storage[\\/]/, '');
+}
+
+function removeExistingImage(idx: number) {
+    imagesToDelete.value.push(existingImages.value[idx].id);
+    existingImages.value.splice(idx, 1);
+}
+
 const onSubmit = () => {
-    const payload = {
-        title: state.value.title,
-        content: state.value.content,
-        status: state.value.status,
-        category_id: state.value.category_id,
-        tags: JSON.stringify(state.value.tags),
-        references: JSON.stringify({
+    const payload = new FormData();
+    payload.append('title', state.value.title);
+    payload.append('content', state.value.content);
+    payload.append('status', state.value.status);
+    payload.append('category_id', String(state.value.category_id));
+    payload.append('tags', JSON.stringify(state.value.tags));
+    payload.append(
+        'references',
+        JSON.stringify({
             name: state.value.source_name,
             url: state.value.source_url,
         }),
-        views_count: state.value.views_count,
-    };
+    );
+    payload.append('views_count', String(state.value.views_count));
+    images.value.forEach((file) => {
+        payload.append('images[]', file);
+    });
+    imagesToDelete.value.forEach((id) => {
+        payload.append('delete_images[]', String(id));
+    });
 
     if (props.isEdit && props.publication?.id) {
-        router.put(route('admin.publications.update', props.publication.id), payload, {
+        router.post(route('admin.publications.update', props.publication.id), payload, {
+            forceFormData: true,
             onSuccess: () => {
                 toast.add({
                     title: 'Publicación actualizada',
@@ -98,6 +142,7 @@ const onSubmit = () => {
         });
     } else {
         router.post(route('admin.publications.store'), payload, {
+            forceFormData: true,
             onSuccess: () => {
                 toast.add({
                     title: 'Publicación creada',
@@ -221,10 +266,47 @@ watch(
                             <UFormField label="Etiquetas (tags)" name="tags">
                                 <UInputTags v-model="state.tags" class="w-full" placeholder="Agregar etiquetas..." />
                             </UFormField>
+
+                            <UFormField v-if="isEdit" label="Vistas" name="views_count">
+                                <UInput v-model="state.views_count" class="w-full" />
+                            </UFormField>
                         </div>
 
                         <!-- Columna derecha -->
                         <div class="space-y-6">
+                            <div class="mb-6">
+                                <label class="mb-2 block text-sm font-medium text-foreground">Imágenes (máx. 5)</label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    @change="handleImageChange"
+                                    :disabled="images.length + existingImages.length >= 5"
+                                />
+                                <div class="mt-2 flex flex-wrap gap-4">
+                                    <div v-for="(img, idx) in existingImages" :key="img.id" class="relative h-24 w-24">
+                                        <img :src="getImageUrl(img.file_url)" class="h-full w-full rounded border object-cover" />
+                                        <button
+                                            type="button"
+                                            @click="removeExistingImage(idx)"
+                                            class="absolute top-1 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white"
+                                        >
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div v-for="(src, idx) in imagePreviews" :key="'new-' + idx" class="relative h-24 w-24">
+                                        <img :src="src" class="h-full w-full rounded border object-cover" />
+                                        <button
+                                            type="button"
+                                            @click="removeImage(idx)"
+                                            class="absolute top-1 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white"
+                                        >
+                                            &times;
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="space-y-4">
                                 <h3 class="text-lg font-medium">Fuente</h3>
                                 <UFormField label="Nombre de la fuente" name="source_name">
@@ -234,10 +316,6 @@ watch(
                                     <UInput v-model="state.source_url" placeholder="https://ejemplo.com" class="w-full" />
                                 </UFormField>
                             </div>
-
-                            <UFormField v-if="isEdit" label="Vistas" name="views_count">
-                                <UInput v-model="state.views_count" class="w-full" readonly />
-                            </UFormField>
                         </div>
                     </div>
 

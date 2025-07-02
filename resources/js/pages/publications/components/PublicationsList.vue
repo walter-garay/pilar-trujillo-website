@@ -58,6 +58,12 @@ const formatDate = (dateString: string) => {
 const goToPublication = (id: number) => {
     router.visit(`/publicaciones/${id}`);
 };
+
+function getImageUrl(url: string) {
+    if (!url) return '';
+    if (url.startsWith('/assets') || url.startsWith('http')) return url;
+    return '/storage/' + url.replace(/^storage[\\/]/, '');
+}
 </script>
 
 <template>
@@ -92,7 +98,7 @@ const goToPublication = (id: number) => {
             >
                 <!-- Imagen de la publicación -->
                 <div v-if="publication.images && publication.images.length" class="mb-2">
-                    <img :src="publication.images[0].file_url" :alt="publication.title" class="h-40 w-full rounded object-cover" />
+                    <img :src="getImageUrl(publication.images[0].file_url)" :alt="publication.title" class="h-40 w-full rounded object-cover" />
                 </div>
                 <!-- Badge de categoría en esquina superior derecha -->
                 <div v-if="publication.category" class="absolute top-3 right-3 z-10">

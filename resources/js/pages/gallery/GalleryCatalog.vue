@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Navbar from '@/pages/landing/components/Navbar.vue';
 import Footer from '@/pages/landing/sections/Footer.vue';
-import { ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 // Galería estática de imágenes tipo masonry
 
@@ -87,6 +87,8 @@ const galleryImages = [
 
 const lightboxOpen = ref(false);
 const lightboxImg = ref('');
+const visibleImages = ref<boolean[]>(galleryImages.map(() => false));
+const observers: IntersectionObserver[] = [];
 
 function openLightbox(img: string) {
     lightboxImg.value = img;
@@ -96,6 +98,31 @@ function closeLightbox() {
     lightboxOpen.value = false;
     lightboxImg.value = '';
 }
+
+onMounted(() => {
+    galleryImages.forEach((_, i) => {
+        const el = document.getElementById(`gallery-img-${i}`);
+        if (el) {
+            const observer = new window.IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            visibleImages.value[i] = true;
+                            observer.disconnect();
+                        }
+                    });
+                },
+                { rootMargin: '200px' },
+            );
+            observer.observe(el);
+            observers.push(observer);
+        }
+    });
+});
+
+onBeforeUnmount(() => {
+    observers.forEach((observer) => observer.disconnect());
+});
 </script>
 
 <template>
@@ -103,16 +130,22 @@ function closeLightbox() {
     <section class="gallery-section">
         <h1 class="gallery-title">Galería de Fotos</h1>
         <div class="gallery-flex">
-            <img
+            <div
                 v-for="(img, i) in galleryImages"
                 :key="i"
-                :src="img"
-                :alt="`Foto de galería ${i + 1}`"
-                loading="lazy"
-                class="gallery-img"
-                @click="openLightbox(img)"
-                style="cursor: pointer"
-            />
+                :id="`gallery-img-${i}`"
+                style="min-width: 200px; min-height: 120px; display: flex; align-items: center; justify-content: center"
+            >
+                <img
+                    v-if="visibleImages[i]"
+                    :src="img"
+                    :alt="`Foto de galería ${i + 1}`"
+                    loading="lazy"
+                    class="gallery-img"
+                    @click="openLightbox(img)"
+                    style="cursor: pointer"
+                />
+            </div>
         </div>
         <div v-if="lightboxOpen" class="lightbox" @click.self="closeLightbox">
             <button class="lightbox-close" @click="closeLightbox" aria-label="Cerrar">&times;</button>
