@@ -11,6 +11,7 @@ export default defineConfig({
         laravel({
             input: ['resources/js/app.ts'],
             ssr: 'resources/js/ssr.ts',
+            publicDirectory: 'public_html', 
             refresh: true,
         }),
         tailwindcss(),
@@ -37,7 +38,7 @@ export default defineConfig({
         },
     },
     build: {
-        outDir: 'build', // Asegúrate de que la salida esté en 'public/build'
+        outDir: './public_html/build', // Asegúrate de que la salida esté en 'public/build'
         manifest: true, // Asegura que el archivo manifest.json se genere
     },
 });
