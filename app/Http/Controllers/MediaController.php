@@ -67,6 +67,13 @@ class MediaController extends Controller
             'tags' => 'nullable',
         ]);
         $validated['user_id'] = Auth::id() ?? 1;
+        // Si no hay cover y el file_url es de YouTube, generar cover automáticamente
+        if (empty($validated['cover_image_url']) && !empty($validated['file_url']) && strpos($validated['file_url'], 'youtu') !== false) {
+            $youtubeId = $this->extractYoutubeId($validated['file_url']);
+            if ($youtubeId) {
+                $validated['cover_image_url'] = "https://img.youtube.com/vi/{$youtubeId}/hqdefault.jpg";
+            }
+        }
         $media = Media::create($validated);
         return redirect()->route('admin.medias', ['type' => $media->type])->with('success', 'Media creada exitosamente.');
     }
@@ -166,5 +173,25 @@ class MediaController extends Controller
             'selectedType' => $type,
             'categories' => $categories,
         ]);
+    }
+
+    /**
+     * Extrae el ID de un video de YouTube desde una URL.
+     */
+    private function extractYoutubeId($url)
+    {
+        $videoId = null;
+        if (strpos($url, 'youtu') === false) {
+            return null;
+        }
+        // Para youtube.com/watch?v=ID
+        if (preg_match('/youtube\.com\/.*[?&]v=([^&]+)/', $url, $matches)) {
+            $videoId = $matches[1];
+        }
+        // Para youtu.be/ID
+        elseif (preg_match('/youtu\.be\/([^?&]+)/', $url, $matches)) {
+            $videoId = $matches[1];
+        }
+        return $videoId;
     }
 }

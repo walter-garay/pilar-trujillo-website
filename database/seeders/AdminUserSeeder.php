@@ -27,7 +27,7 @@ class AdminUserSeeder extends Seeder
                 'youtube' => 'https://www.youtube.com/@reencuentro_cultural',
                 'twitter' => 'https://x.com/Reencuentro_Hoy',
             ],
-            'photo_url' => '/assets/images/pilar/perfil.png',
+            'photo_url' => '/assets/images/pilar/perfil.jpg',
             'email_verified_at' => now(),
         ]);
     }

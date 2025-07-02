@@ -34,6 +34,7 @@ const changeTab = (type: string | number) => {
             size="lg"
             color="primary"
             variant="pill"
+            :disabled="(item) => item.disabled"
         />
     </div>
 </template>

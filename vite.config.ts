@@ -36,4 +36,8 @@ export default defineConfig({
             '@': path.resolve(__dirname, './resources/js'),
         },
     },
+    build: {
+        outDir: 'build', // Asegúrate de que la salida esté en 'public/build'
+        manifest: true, // Asegura que el archivo manifest.json se genere
+    },
 });

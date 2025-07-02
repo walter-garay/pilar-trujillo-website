@@ -30,7 +30,8 @@ export const useMediaTabs = () => {
         {
             value: 'exclusive',
             label: 'Exclusivo',
-            icon: 'i-lucide-star',
+            icon: 'i-lucide-lock',
+            disabled: true,
         },
     ]);
 

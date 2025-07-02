@@ -33,7 +33,15 @@ function openVideoModal(video: Media) {
                     Explora todo mi contenido organizado por categorías para encontrar exactamente lo que buscas
                 </p>
             </div>
-            <UTabs :items="items" v-model="selectedTab" class="w-full space-y-8" size="lg" color="primary" variant="pill">
+            <UTabs
+                :items="items"
+                v-model="selectedTab"
+                class="w-full space-y-8"
+                size="lg"
+                color="primary"
+                variant="pill"
+                :disabled="(item) => item.disabled"
+            >
                 <template #television>
                     <div class="flex flex-col items-center gap-8">
                         <div class="grid w-full grid-cols-1 justify-center gap-6 md:grid-cols-2 lg:grid-cols-3">
